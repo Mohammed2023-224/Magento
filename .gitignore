@@ -38,3 +38,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/src/main/resources/archetype-resources/src/main/java/App.java
+/src/main/resources/archetype-resources/src/test/java/AppTest.java
+/src/main/resources/META-INF/maven/archetype.xml
+/src/main/resources/archetype-resources/pom.xml
