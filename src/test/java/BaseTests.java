@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class BaseTests {
     public WebDriver driver;
-    public String testData = FrameWorkConstants.completeLogFile;
+    public String testData = FrameWorkConstants.testData;
 
     @BeforeClass
     public void initDriver(ITestContext context) {
@@ -23,7 +23,6 @@ public class BaseTests {
     public void tearDriver() {
         driver.close();
     }
-
 
     private String options() {
         ArrayList<String> ops = new ArrayList<>();

@@ -3,6 +3,7 @@ package pages;
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
 import engine.enums.Waits;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +26,7 @@ public class Inv extends HomePage {
     private final By comparePage = By.xpath("//span[text()='Compare Products']");
     private final By comparedItems = By.xpath("//ol[@id='compare-items']//li");
     private final By addedMessage = By.xpath("//div[@class='page messages']");
+    private final By filterApplied = By.xpath("//span[@class='filter-value']");
 
     private By certainProduct(int index) {
         return By.xpath("(//ol[@class='products list items product-items']//li)[" + index + "]");
@@ -36,6 +38,14 @@ public class Inv extends HomePage {
 
     private By leftSectionFilters(int filterType, int filterName) {
         return By.xpath("((//div[@id='narrow-by-list']//div[@role='presentation'])[" + filterType + "]//ol//li)[" + filterName + "]//a");
+    }
+
+    private By leftSectionFilters(String filter) {
+        return By.xpath("//div[@id='narrow-by-list']//div[@role='presentation']//a[contains(text(),'" + filter + "')]");
+    }
+
+    private By leftSectionSizeAndColorFilters(String filter) {
+        return By.xpath("//div[@id='narrow-by-list']//div[@role='presentation']//div[@option-label='" + filter + "']/parent::a");
     }
 
     private By certainProductCompare(int index) {
@@ -57,6 +67,7 @@ public class Inv extends HomePage {
         return ElementActions.getTextFromListOfElements(driver, allProductsNames);
     }
 
+    @Step("choose limiter index {[index}]")
     public Inv chooseLimiter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(limiter));
         ElementActions.handleSelection(driver, limiter, index);
@@ -64,6 +75,7 @@ public class Inv extends HomePage {
         return this;
     }
 
+    @Step("choose sorter index {[index}]")
     public Inv chooseSorter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(sorter));
         ElementActions.handleSelection(driver, sorter, index);
@@ -71,6 +83,7 @@ public class Inv extends HomePage {
         return this;
     }
 
+    @Step("click product {[index}]")
     public Inv clickCertainProductCompare(int index) {
         ElementActions.hover(driver, certainProduct(index));
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare(index)));
@@ -79,6 +92,7 @@ public class Inv extends HomePage {
         return this;
     }
 
+    @Step(" click on product {[name}]")
     public Inv clickCertainProduct(String name) {
         try {
             ElementActions.waitExplicitly(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
@@ -90,24 +104,39 @@ public class Inv extends HomePage {
         return this;
     }
 
-    public Inv clickOnFilter(int filterType, int filterName) {
-        ElementActions.waitExplicitly(driver, 8).until(ExpectedConditions.presenceOfElementLocated(leftSectionFilters(filterType, filterName)));
-        BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(filterType, filterName), "href"));
+    @Step("choose filter {[filterType}]")
+    //Todo filter By name
+    public Inv clickOnFilter(String filterType) {
+        try {
+            try {
+                ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionFilters(filterType)));
+                BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(filterType), "href"));
+            } catch (Exception e) {
+                ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionSizeAndColorFilters(filterType)));
+                BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionSizeAndColorFilters(filterType), "href"));
+            }
+        } catch (Exception e) {
+            BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(1, 1), "href"));
+        }
         return this;
     }
 
+    @Step("click on [compare]")
     public Inv clickOnCompare() {
         ElementActions.waitExplicitly(driver, 15, compare_btn, Waits.CLICKABLE.toString());
         ElementActions.click(driver, compare_btn);
         return this;
     }
 
+    @Step("Check compare page")
     public Boolean checkComparePage() {
-//        ElementActions.waitExplicitly(driver, 15, comparePage, Waits.PRESENT.toString());
         return ElementActions.isElementDisplayed(driver, comparePage);
     }
 
-//    public String getProductName() {
-//    }
+    @Step("Check filters applied")
+    public Boolean checkFiltersApplied() {
+        return ElementActions.isElementDisplayed(driver, filterApplied);
+    }
+
 
 }

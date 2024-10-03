@@ -21,7 +21,6 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     String testLogFile = FrameWorkConstants.testLogFile;
     String completeLogFile = FrameWorkConstants.testLogFile;
 
-
     public void onTestStart(ITestResult result) {
         CustomLogger.logger.info("starting test: " + result.getName());
         testcaseCount++;
@@ -50,7 +49,6 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
 
     }
 
-
     @Override
     public boolean retry(ITestResult iTestResult) {
         if (counter <= retryLimit) {
@@ -78,12 +76,10 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         CustomLogger.logger.info(skippedTestCases + " test cases skipped" + Arrays.toString(ListenerHelpers.getSkippedTestMethodNames(context)));
     }
 
-
     public void onStart(ITestContext context) {
         ListenerHelpers.deleteFile(completeLogFile);
         ListenerHelpers.deleteDirectory(allurePath);
         ListenerHelpers.deleteFile(testLogFile);
-//        Allure.getLifecycle();
     }
 
     public void onExecutionStart() {

@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 
 public class AllureListener implements ITestListener {
 
-
     public static void saveScreenShot(WebDriver driver, String text) {
         CustomLogger.logger.info("Taking screenshot and saving to allure report");
         Allure.addAttachment(text, new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));

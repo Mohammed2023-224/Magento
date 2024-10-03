@@ -35,39 +35,37 @@ public class HomePage {
         return this;
     }
 
-    @Step("Navigate to link")
+    @Step("Navigate to {[crit]}")
     public HomePage navigateBetweenLinks(String crit, int inex) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.presenceOfElementLocated(navigationOptions(crit, inex)));
         BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, navigationOptions(crit, inex), "href"));
         return this;
     }
 
-    @Step("Click on cart")
+    @Step("Click on [cart]")
     public HomePage clickOnCart() {
-//        ElementActions.waitExplicitly(driver, 5, cart, Waits.VISIBLE.toString());
         ElementActions.waitExplicitly(driver, 5, cart, Waits.CLICKABLE.toString());
         ElementActions.click(driver, cart);
         return this;
     }
 
 
-    @Step("Click on checkOut")
+    @Step("Click on [checkOut]")
     public HomePage clickOnCheckOut() {
-//        ElementActions.waitExplicitly(driver, 5, checkout, Waits.PRESENT.toString());
         ElementActions.waitExplicitly(driver, 5, checkout, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, checkout);
         return this;
     }
 
 
-    @Step("Click on viewAndEdit")
+    @Step("Click on [viewAndEdit]")
     public HomePage clickOnViewAndEdit() {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(viewAndEditCart));
         ElementActions.click(driver, viewAndEditCart);
         return this;
     }
 
-    @Step("Type in search bar and click enter")
+    @Step("Type in search bar {[text]} and click [enter]")
     public HomePage typeSearchBar(String text) {
         ElementActions.type(driver, search_txtArea, text);
         ElementActions.clickEnter(driver, search_txtArea);

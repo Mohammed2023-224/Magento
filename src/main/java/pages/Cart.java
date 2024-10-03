@@ -17,8 +17,7 @@ public class Cart extends HomePage {
     private By total_row = By.xpath("//tr[@class='price']");
     private By proceed_Btn = By.xpath("//span[text()='Proceed to Checkout']");
 
-
-    @Step("Click on proceed btn")
+    @Step("Click on [proceed btn]")
     public Cart clickProccedButton() {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(proceed_Btn));
         ElementActions.click(driver, proceed_Btn);
@@ -26,7 +25,7 @@ public class Cart extends HomePage {
         return this;
     }
 
-    @Step("Click on update shopping cart")
+    @Step("Click on [update shopping cart]")
     public Cart clickUpdatShoppingCart() {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(updateShoppingCart_Btn));
         ElementActions.click(driver, updateShoppingCart_Btn);
@@ -34,12 +33,13 @@ public class Cart extends HomePage {
         return this;
     }
 
+    @Step("get total price")
     public String getTotalPrice() {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(total_row));
         return ElementActions.getText(driver, total_row);
     }
 
-    @Step("Type Quantity")
+    @Step("Type Quantity {[quantity]}")
     public Cart typeQuantity(String quantity) {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(quantity_txtArea));
         ElementActions.type(driver, proceed_Btn, quantity);

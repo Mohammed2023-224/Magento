@@ -25,7 +25,7 @@ public class test extends BaseTests {
                 .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
         ArrayList<String> proName = inv.getProductsNames();
         CustomLogger.logger.info(proName);
-//        inv.chooseSorter(Integer.parseInt(data.get("sorter")));
+        inv.chooseSorter(Integer.parseInt(data.get("sorter")));
         ArrayList<String> prodName = inv.getProductsNames();
         CustomLogger.logger.info(prodName);
         Assert.assertNotEquals(prodName, proName);
@@ -44,17 +44,17 @@ public class test extends BaseTests {
         Assert.assertNotEquals(countA, countB);
     }
 
-    @Test(dataProvider = "filter", enabled = false)
+    @Test(dataProvider = "filter")
     public void assertFilters(Map<String, String> data) {
         home.
                 navigationToWebSite()
                 .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
         ArrayList<String> proName = inv.getProductsNames();
         CustomLogger.logger.info(proName);
-        inv.clickOnFilter(Integer.parseInt(data.get("filtertype")), Integer.parseInt(data.get("filtercrit")));
+        inv.clickOnFilter("XS");
         ArrayList<String> prodName = inv.getProductsNames();
         CustomLogger.logger.info(prodName);
-        Assert.assertNotEquals(proName, prodName);
+        Assert.assertTrue(inv.checkFiltersApplied());
     }
 
 
@@ -89,7 +89,7 @@ public class test extends BaseTests {
                 .typeEmailField(data.get("email"))
                 .typeCityField(data.get("city"))
                 .typePostalCodeField(data.get("postal"))
-                .chooseCountry(data.get("country"))
+                .chooseCountry(data.get("country"), 2)
                 .typePhoneField(data.get("phone"))
                 .chooseDelivery()
                 .clickNextButton()

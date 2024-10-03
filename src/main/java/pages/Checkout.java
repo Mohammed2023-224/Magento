@@ -34,117 +34,98 @@ public class Checkout extends HomePage {
     private By placedOrderSuccessfully_row = By.xpath("//span[text()='Thank you for your purchase!']");
     private By freeDelivery = By.xpath("(//input[@class='radio'])[1]");
 
-    @Step("Type in email field")
-    public Checkout typeEmailField(String text) {
+    @Step("Type in email field {[email]}")
+    public Checkout typeEmailField(String email) {
         ElementActions.waitExplicitly(driver, 10, emailField_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, emailField_txtArea, text);
+        ElementActions.type(driver, emailField_txtArea, email);
         ElementActions.waitExplicitly(driver, 10, loadingImg, Waits.VISIBLE.toString());
         ElementActions.waitExplicitly(driver, 10, loadingImg, "invisible");
         CustomLogger.logger.info("type: " + emailField_txtArea + " in email field");
         return this;
     }
 
-    @Step("Type in name field")
-    public Checkout typeNameField(String text) {
+    @Step("Type in name field {[name]}")
+    public Checkout typeNameField(String name) {
         ElementActions.waitExplicitly(driver, 10, nameField_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, nameField_txtArea, text);
+        ElementActions.type(driver, nameField_txtArea, name);
         CustomLogger.logger.info("type: " + nameField_txtArea + " in name field");
         return this;
     }
 
-    @Step("Type in street field")
-    public Checkout typeStreetField(String text) {
+    @Step("Type in street field {[street]}")
+    public Checkout typeStreetField(String street) {
         ElementActions.waitExplicitly(driver, 10, street1_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, street1_txtArea, text);
+        ElementActions.type(driver, street1_txtArea, street);
         CustomLogger.logger.info("type: " + street1_txtArea + "in street field");
         return this;
     }
 
-
-    @Step("Type in city field")
-    public Checkout typeCityField(String text) {
+    @Step("Type in city field {[city]}")
+    public Checkout typeCityField(String city) {
         ElementActions.waitExplicitly(driver, 10, city_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, city_txtArea, text);
+        ElementActions.type(driver, city_txtArea, city);
         CustomLogger.logger.info("type: " + city_txtArea + " in city field");
         return this;
     }
 
-
-    @Step("Type in last Name field")
-    public Checkout typeLastNameField(String text) {
+    @Step("Type in last Name field {[lastName]}")
+    public Checkout typeLastNameField(String lastName) {
         ElementActions.waitExplicitly(driver, 10, lastname_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, lastname_txtArea, text);
+        ElementActions.type(driver, lastname_txtArea, lastName);
         CustomLogger.logger.info("type: " + lastname_txtArea + " in last name field");
         return this;
     }
 
-
-    @Step("Type in phone field")
-    public Checkout typePhoneField(String text) {
+    @Step("Type in phone field {[phone]}")
+    public Checkout typePhoneField(String phone) {
         ElementActions.waitExplicitly(driver, 10, telephone_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, telephone_txtArea, text);
+        ElementActions.type(driver, telephone_txtArea, phone);
         ElementActions.waitExplicitly(driver, 10, emailLoader, Waits.VISIBLE.toString());
         ElementActions.waitExplicitly(driver, 10, emailLoader, "invisible");
         CustomLogger.logger.info("type: " + telephone_txtArea + "in phone field");
         return this;
     }
 
-
-    @Step("Type in postal code field")
-    public Checkout typePostalCodeField(String text) {
+    @Step("Type in postal code field {[postal]}")
+    public Checkout typePostalCodeField(String postal) {
         ElementActions.waitExplicitly(driver, 2, postcode_txtArea, Waits.VISIBLE.toString());
-        ElementActions.type(driver, postcode_txtArea, text);
+        ElementActions.type(driver, postcode_txtArea, postal);
         CustomLogger.logger.info("type: " + postcode_txtArea + "in postal code field");
         return this;
     }
 
-    @Step("Choose country")
-    public Checkout chooseCountry(int index) {
-        ElementActions.waitExplicitly(driver, 10, country_id_ddl, Waits.VISIBLE.toString());
-        ElementActions.handleSelection(driver, country_id_ddl, index);
-        return this;
-    }
-
-    @Step("Choose country")
-    public Checkout chooseCountry(String text) {
+    @Step("Choose country {[country]}")
+    public Checkout chooseCountry(String text, int index) {
         ElementActions.waitExplicitly(driver, 3, country_id_ddl, Waits.VISIBLE.toString());
         try {
             ElementActions.handleSelection(driver, country_id_ddl, text);
         } catch (Exception e) {
-            chooseCountry(2);
+            ElementActions.handleSelection(driver, country_id_ddl, index);
         }
         return this;
     }
 
-    @Step("Choose state")
-    public Checkout chooseStat(int text) {
-        ElementActions.waitExplicitly(driver, 10, region_id_ddl, Waits.VISIBLE.toString());
-        ElementActions.handleSelection(driver, region_id_ddl, text);
-        return this;
-    }
-
-    @Step("Choose delivery")
+    @Step("Choose [free delivery] checkbox")
     public Checkout chooseDelivery() {
         ElementActions.useJavaExecutorToClick(driver, freeDelivery);
         return this;
     }
 
-    @Step("Click on next btn")
+    @Step("Click on [next btn]")
     public Checkout clickNextButton() {
         ElementActions.waitExplicitly(driver, 10, nex_btn, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, nex_btn);
         return this;
     }
 
-    @Step("Click on place order btn")
+    @Step("Click on [place order btn]")
     public Checkout clickPlaceOrderButton() {
-//        ElementActions.waitExplicitly(driver, 10, loadingImg, Waits.VISIBLE.toString());
-//        ElementActions.waitExplicitly(driver, 10, loadingImg, "invisible");
         ElementActions.waitExplicitly(driver, 10, placeOrder, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, placeOrder);
         return this;
     }
 
+    @Step("get order number")
     public String getOrderNumber() {
         ElementActions.waitExplicitly(driver, 10, orderNumber, Waits.VISIBLE.toString());
         String order = ElementActions.getText(driver, orderNumber);
@@ -152,6 +133,7 @@ public class Checkout extends HomePage {
         return order;
     }
 
+    @Step("check order is created")
     public Boolean checkOrder() {
         ElementActions.waitExplicitly(driver, 10, continueShopping, Waits.CLICKABLE.toString());
         return ElementActions.isElementDisplayed(driver, continueShopping);
