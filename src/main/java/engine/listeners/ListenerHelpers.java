@@ -1,8 +1,12 @@
 package engine.listeners;
 
+import engine.logger.CustomLogger;
+import org.apache.commons.io.FileUtils;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Set;
 
 public class ListenerHelpers {
@@ -53,4 +57,29 @@ public class ListenerHelpers {
         }
         return methodNames;
     }
+
+
+    public static void deleteDirectory(String path) {
+        File directory = new File(path);
+        try {
+            FileUtils.forceDelete(directory);
+            CustomLogger.logger.info("Deleted the directory " + path);
+        } catch (Exception e) {
+            CustomLogger.logger.info("couldn't delete directory " + path);
+        }
+    }
+
+    public static void deleteFile(String path) {
+        File file = new File(path);
+        try {
+            FileOutputStream fis = new FileOutputStream(path);
+            fis.close();
+            FileUtils.forceDelete(file);
+            CustomLogger.logger.info("Deleted the file " + path);
+        } catch (Exception e) {
+//            CustomLogger.logger.info("couldn't delete file " + path);
+        }
+    }
+
+
 }

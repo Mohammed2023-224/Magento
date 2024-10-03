@@ -17,21 +17,23 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     ArrayList<String> success = new ArrayList<>();
     static int counter = 0;
     static int retryLimit = 4;
+    static String allurePath = "allure-results";
+    String filePath = "test_output/output/logs/testLogs/myLogs.log";
 
 
     public void onTestStart(ITestResult result) {
         CustomLogger.logger.info("starting test: " + result.getName());
-
         testcaseCount++;
     }
 
     public void onTestSuccess(ITestResult result) {
         CustomLogger.logger.info("Test success hooray: " + result.getName());
         success.add(result.getName());
+        AllureListener.saveTextLog(filePath);
+        ListenerHelpers.deleteFile(filePath);
         successfulTestCases++;
     }
-
-
+    
     public void onTestFailure(ITestResult result) {
         WebDriver mainDriver = (WebDriver) result.getTestContext().getAttribute("driver");
         failedTestCases++;
@@ -40,8 +42,9 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         ScreenshotManager.takeScreenShotFolder(mainDriver, result.getName());
         //screenshot in allure report
         AllureListener.saveScreenShot(mainDriver, result.getName() + " failure screenshot ");
-        AllureListener.saveTextLog("Test failed: " + result.getName());
         retry(result);
+        AllureListener.saveTextLog(filePath);
+        ListenerHelpers.deleteFile(filePath);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
 
     }
@@ -74,8 +77,10 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         CustomLogger.logger.info(skippedTestCases + " test cases skipped" + Arrays.toString(ListenerHelpers.getSkippedTestMethodNames(context)));
     }
 
+
     public void onStart(ITestContext context) {
-        AllureListener.deleteAllurePastRuns();
+        ListenerHelpers.deleteDirectory(allurePath);
+        ListenerHelpers.deleteFile(filePath);
 //        Allure.getLifecycle();
     }
 
