@@ -1,5 +1,6 @@
 package engine.listeners;
 
+import engine.constants.FrameWorkConstants;
 import engine.evidence.ScreenshotManager;
 import engine.logger.CustomLogger;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TestngListener implements ITestListener, IExecutionListener, IRetryAnalyzer, IHookable {
-    //TODO delete log files after every test
     int testcaseCount = 0;
     int successfulTestCases = 0;
     int failedTestCases = 0;
@@ -17,8 +17,9 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     ArrayList<String> success = new ArrayList<>();
     static int counter = 0;
     static int retryLimit = 4;
-    static String allurePath = "allure-results";
-    String filePath = "test_output/output/logs/testLogs/myLogs.log";
+    static String allurePath = FrameWorkConstants.allureDirectory;
+    String testLogFile = FrameWorkConstants.testLogFile;
+    String completeLogFile = FrameWorkConstants.testLogFile;
 
 
     public void onTestStart(ITestResult result) {
@@ -29,11 +30,11 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     public void onTestSuccess(ITestResult result) {
         CustomLogger.logger.info("Test success hooray: " + result.getName());
         success.add(result.getName());
-        AllureListener.saveTextLog(filePath);
-        ListenerHelpers.deleteFile(filePath);
+        AllureListener.saveTextLog(testLogFile);
+        ListenerHelpers.deleteFile(testLogFile);
         successfulTestCases++;
     }
-    
+
     public void onTestFailure(ITestResult result) {
         WebDriver mainDriver = (WebDriver) result.getTestContext().getAttribute("driver");
         failedTestCases++;
@@ -43,8 +44,8 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         //screenshot in allure report
         AllureListener.saveScreenShot(mainDriver, result.getName() + " failure screenshot ");
         retry(result);
-        AllureListener.saveTextLog(filePath);
-        ListenerHelpers.deleteFile(filePath);
+        AllureListener.saveTextLog(testLogFile);
+        ListenerHelpers.deleteFile(testLogFile);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
 
     }
@@ -79,8 +80,9 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
 
 
     public void onStart(ITestContext context) {
+        ListenerHelpers.deleteFile(completeLogFile);
         ListenerHelpers.deleteDirectory(allurePath);
-        ListenerHelpers.deleteFile(filePath);
+        ListenerHelpers.deleteFile(testLogFile);
 //        Allure.getLifecycle();
     }
 

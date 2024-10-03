@@ -1,3 +1,4 @@
+import engine.constants.FrameWorkConstants;
 import engine.driver.SetupDriver;
 import engine.logger.CustomLogger;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public class BaseTests {
     public WebDriver driver;
-    public String path = "src/test/resources/setup/1.xlsx";
+    public String testData = FrameWorkConstants.completeLogFile;
 
     @BeforeClass
     public void initDriver(ITestContext context) {

@@ -103,31 +103,31 @@ public class test extends BaseTests {
     @DataProvider(name = "endToend")
     private Object[] data() {
         ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(path, "EndToEnd", "LinkScript", "lnk0001");
+        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0001");
     }
 
     @DataProvider(name = "compare")
     private Object[] compareData() {
         ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(path, "EndToEnd", "LinkScript", "lnk0002");
+        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0002");
     }
 
     @DataProvider(name = "limiter")
     private Object[] limiterData() {
         ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(path, "EndToEnd", "LinkScript", "lnk0003");
+        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0003");
     }
 
     @DataProvider(name = "filter")
     private Object[] filterData() {
         ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(path, "EndToEnd", "LinkScript", "lnk0004");
+        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0004");
     }
 
     @DataProvider(name = "sorter")
     private Object[] sorterData() {
         ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(path, "EndToEnd", "LinkScript", "lnk0005");
+        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0005");
     }
 
     @BeforeClass

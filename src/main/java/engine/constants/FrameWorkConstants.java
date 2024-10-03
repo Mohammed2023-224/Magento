@@ -12,6 +12,10 @@ public class FrameWorkConstants {
     static public final String testAutomationSetup = ReadProperties.getProperty("testAutomationSetup");
     static public final String browser = ReadProperties.getProperty("browser");
     static public final String screenshotsPath = ReadProperties.getProperty("screenshotsPath");
+    static public final String testLogFile = ReadProperties.getProperty("testsLogFile");
+    static public final String allureDirectory = ReadProperties.getProperty("allureDirectory");
+    static public final String testData = ReadProperties.getProperty("testData");
+    static public final String completeLogFile = ReadProperties.getProperty("completeLogFile");
 
 
 }
