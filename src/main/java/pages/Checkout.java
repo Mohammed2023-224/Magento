@@ -12,27 +12,27 @@ public class Checkout extends HomePage {
         super(driver);
     }
 
-    private By emailField_txtArea = By.id("customer-email");
-    private By nameField_txtArea = By.name("firstname");
-    private By street1_txtArea = By.name("street[0]");
-    private By street2_txtArea = By.name("street[1]");
-    private By street3_txtArea = By.name("street[2]");
-    private By city_txtArea = By.name("city");
-    private By lastname_txtArea = By.name("lastname");
-    private By region_id_ddl = By.name("region_id");
-    private By telephone_txtArea = By.name("telephone");
-    private By country_id_ddl = By.name("country_id");
-    private By postcode_txtArea = By.name("postcode");
-    private By nex_btn = By.xpath("//button[@class='button action continue primary']");
-    private By message = By.xpath("//div[@class='message notice']");
-    private By placeOrder = By.xpath("//button//span[text()='Place Order']");
-    private By continueShopping = By.xpath("//span[text()='Continue Shopping']");
-    private By orderNumber = By.xpath("//div[@class='checkout-success']//p//span");
-    private By loadingImg = By.xpath("//img[@alt='Loading...']");
-    private By emailLoader = By.xpath("//div[@class='loader']");
+    private final By emailField_txtArea = By.id("customer-email");
+    private final By nameField_txtArea = By.name("firstname");
+    private final By street1_txtArea = By.name("street[0]");
+    private final By street2_txtArea = By.name("street[1]");
+    private final By street3_txtArea = By.name("street[2]");
+    private final By city_txtArea = By.name("city");
+    private final By lastname_txtArea = By.name("lastname");
+    private final By region_id_ddl = By.name("region_id");
+    private final By telephone_txtArea = By.name("telephone");
+    private final By country_id_ddl = By.name("country_id");
+    private final By postcode_txtArea = By.name("postcode");
+    private final By nex_btn = By.xpath("//button[@class='button action continue primary']");
+    private final By message = By.xpath("//div[@class='message notice']");
+    private final By placeOrder = By.xpath("//button//span[text()='Place Order']");
+    private final By continueShopping = By.xpath("//span[text()='Continue Shopping']");
+    private final By orderNumber = By.xpath("//div[@class='checkout-success']//p//span");
+    private final By loadingImg = By.xpath("//img[@alt='Loading...']");
+    private final By emailLoader = By.xpath("//div[@class='loader']");
     //    private By grandTotal_row = By.className("grand totals");
-    private By placedOrderSuccessfully_row = By.xpath("//span[text()='Thank you for your purchase!']");
-    private By freeDelivery = By.xpath("(//input[@class='radio'])[1]");
+    private final By placedOrderSuccessfully_row = By.xpath("//span[text()='Thank you for your purchase!']");
+    private final By freeDelivery = By.xpath("(//input[@class='radio'])[1]");
 
     @Step("Type in email field {[email]}")
     public Checkout typeEmailField(String email) {
@@ -99,8 +99,10 @@ public class Checkout extends HomePage {
         ElementActions.waitExplicitly(driver, 3, country_id_ddl, Waits.VISIBLE.toString());
         try {
             ElementActions.handleSelection(driver, country_id_ddl, text);
+            CustomLogger.logger.info("Choose country: " + text);
         } catch (Exception e) {
             ElementActions.handleSelection(driver, country_id_ddl, index);
+            CustomLogger.logger.info("Choose country indexed: " + index);
         }
         return this;
     }
@@ -108,6 +110,7 @@ public class Checkout extends HomePage {
     @Step("Choose [free delivery] checkbox")
     public Checkout chooseDelivery() {
         ElementActions.useJavaExecutorToClick(driver, freeDelivery);
+        CustomLogger.logger.info("click on free delivery checkbox");
         return this;
     }
 
@@ -115,6 +118,7 @@ public class Checkout extends HomePage {
     public Checkout clickNextButton() {
         ElementActions.waitExplicitly(driver, 10, nex_btn, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, nex_btn);
+        CustomLogger.logger.info("click on next button");
         return this;
     }
 
@@ -122,6 +126,7 @@ public class Checkout extends HomePage {
     public Checkout clickPlaceOrderButton() {
         ElementActions.waitExplicitly(driver, 10, placeOrder, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, placeOrder);
+        CustomLogger.logger.info("click on place order button");
         return this;
     }
 
@@ -136,6 +141,7 @@ public class Checkout extends HomePage {
     @Step("check order is created")
     public Boolean checkOrder() {
         ElementActions.waitExplicitly(driver, 10, continueShopping, Waits.CLICKABLE.toString());
+        CustomLogger.logger.info("Check if continue shopping button exists");
         return ElementActions.isElementDisplayed(driver, continueShopping);
     }
 }

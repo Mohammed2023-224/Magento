@@ -36,7 +36,9 @@ public class Cart extends HomePage {
     @Step("get total price")
     public String getTotalPrice() {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(total_row));
-        return ElementActions.getText(driver, total_row);
+        String text = ElementActions.getText(driver, total_row);
+        CustomLogger.logger.info("get total price: " + text);
+        return text;
     }
 
     @Step("Type Quantity {[quantity]}")

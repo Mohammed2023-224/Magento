@@ -58,19 +58,19 @@ public class test extends BaseTests {
     }
 
 
-    @Test(dataProvider = "compare", enabled = false)
+    @Test(dataProvider = "compare")
     public void checkComparePage(Map<String, String> data) {
         home.
                 navigationToWebSite()
                 .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
         inv.clickCertainProductCompare(Integer.parseInt(data.get("firstcompareitem")))
                 .clickCertainProductCompare(Integer.parseInt(data.get("secondcompareitem")))
-                .checkComparedItems();
+                .countComparedItems();
         inv.clickOnCompare();
         Assert.assertTrue(inv.checkComparePage());
     }
 
-    @Test(dataProvider = "endToend", enabled = false)
+    @Test(dataProvider = "endToend")
     public void endToEnd(Map<String, String> data) {
         home.
                 navigationToWebSite()

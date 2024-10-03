@@ -3,6 +3,7 @@ package pages;
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
 import engine.enums.Waits;
+import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -53,17 +54,21 @@ public class Inv extends HomePage {
     }
 
 
-    public int checkComparedItems() {
+    public int countComparedItems() {
+        CustomLogger.logger.info("Count compared items");
         return ElementActions.countElements(driver, comparedItems);
     }
 
     public int countProducts() {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
-        return ElementActions.countElements(driver, allProducts);
+        int counting = ElementActions.countElements(driver, allProducts);
+        CustomLogger.logger.info("Count products: " + counting);
+        return counting;
     }
 
     public ArrayList<String> getProductsNames() {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
+        CustomLogger.logger.info("get Product names in an array list");
         return ElementActions.getTextFromListOfElements(driver, allProductsNames);
     }
 
@@ -71,6 +76,7 @@ public class Inv extends HomePage {
     public Inv chooseLimiter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(limiter));
         ElementActions.handleSelection(driver, limiter, index);
+        CustomLogger.logger.info("Choose limiter indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProducts));
         return this;
     }
@@ -79,6 +85,7 @@ public class Inv extends HomePage {
     public Inv chooseSorter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(sorter));
         ElementActions.handleSelection(driver, sorter, index);
+        CustomLogger.logger.info("Choose sorter indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProductsNames));
         return this;
     }
@@ -86,8 +93,10 @@ public class Inv extends HomePage {
     @Step("click product {[index}]")
     public Inv clickCertainProductCompare(int index) {
         ElementActions.hover(driver, certainProduct(index));
+        CustomLogger.logger.info("hover over product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare(index)));
         ElementActions.click(driver, certainProductCompare(index));
+        CustomLogger.logger.info("click on product compare button for product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(addedMessage));
         return this;
     }
@@ -97,9 +106,10 @@ public class Inv extends HomePage {
         try {
             ElementActions.waitExplicitly(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
             ElementActions.click(driver, productByName(name));
+            CustomLogger.logger.info("Click on product with the name: " + name);
         } catch (Exception e) {
             ElementActions.click(driver, certainProduct(1));
-
+            CustomLogger.logger.info("Click on the first product");
         }
         return this;
     }
@@ -109,12 +119,15 @@ public class Inv extends HomePage {
         try {
             ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionFilters(filterType)));
             BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(filterType), "href"));
+            CustomLogger.logger.info("choose filter: " + filterType);
         } catch (Exception e1) {
             try {
                 ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionSizeAndColorFilters(filterType)));
                 BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionSizeAndColorFilters(filterType), "href"));
+                CustomLogger.logger.info("Choose filter: " + filterType);
             } catch (Exception e2) {
                 BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(1, 1), "href"));
+                CustomLogger.logger.info("Choose first filter");
             }
         }
         return this;
@@ -124,16 +137,19 @@ public class Inv extends HomePage {
     public Inv clickOnCompare() {
         ElementActions.waitExplicitly(driver, 15, compare_btn, Waits.CLICKABLE.toString());
         ElementActions.click(driver, compare_btn);
+        CustomLogger.logger.info("Click on compare");
         return this;
     }
 
     @Step("Check compare page")
     public Boolean checkComparePage() {
+        CustomLogger.logger.info("Check the compare page header");
         return ElementActions.isElementDisplayed(driver, comparePage);
     }
 
-    @Step("Check filters applied")
+    @Step("Check if filters were applied")
     public Boolean checkFiltersApplied() {
+        CustomLogger.logger.info("Check the existence of filters that was applied");
         return ElementActions.isElementDisplayed(driver, filterApplied);
     }
 

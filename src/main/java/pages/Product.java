@@ -39,12 +39,14 @@ public class Product extends HomePage {
     public Product clickAddToCart() {
         ElementActions.useJavaExecutorToClick(driver, addToCart_btn);
         ElementActions.waitExplicitly(driver, 5, addProductMessage, Waits.VISIBLE.toString());
+        CustomLogger.logger.info("Click add to cart button");
         return this;
     }
 
     public Product typeQuantity(String text) {
         ElementActions.waitExplicitly(driver, 5, qty_txtArea, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToType(driver, qty_txtArea, text);
+        CustomLogger.logger.info("Type quantity: " + text);
         return this;
     }
 
@@ -53,8 +55,10 @@ public class Product extends HomePage {
             try {
                 ElementActions.waitExplicitly(driver, 2, productSizes(size), Waits.VISIBLE.toString());
                 ElementActions.click(driver, productSizes(size));
+                CustomLogger.logger.info("Choose size: " + size);
             } catch (Exception e) {
                 ElementActions.click(driver, productSizes(1));
+                CustomLogger.logger.info("Choose first size in the list");
             }
         } else {
             CustomLogger.logger.info("Skip this step as no size elements were found");
@@ -67,8 +71,10 @@ public class Product extends HomePage {
             try {
                 ElementActions.waitExplicitly(driver, 2, productColors(color), Waits.VISIBLE.toString());
                 ElementActions.click(driver, productColors(color));
+                CustomLogger.logger.info("chose color: " + color);
             } catch (Exception e) {
                 ElementActions.click(driver, productColors(1));
+                CustomLogger.logger.info("Choose first color in the list");
             }
         } else {
             CustomLogger.logger.info("Skip this step as no color elements were found");
@@ -84,7 +90,9 @@ public class Product extends HomePage {
 
     public String getName() {
         ElementActions.waitExplicitly(driver, 5, productName, Waits.VISIBLE.toString());
-        return ElementActions.getText(driver, productName);
+        String name = ElementActions.getText(driver, productName);
+        CustomLogger.logger.info("get Product name: " + name);
+        return name;
     }
 
 }
