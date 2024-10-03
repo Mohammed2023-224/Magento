@@ -19,7 +19,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     static int retryLimit = 4;
     static String allurePath = FrameWorkConstants.allureDirectory;
     String testLogFile = FrameWorkConstants.testLogFile;
-    String completeLogFile = FrameWorkConstants.testLogFile;
+    String completeLogFile = FrameWorkConstants.completeLogFile;
 
     public void onTestStart(ITestResult result) {
         CustomLogger.logger.info("starting test: " + result.getName());
