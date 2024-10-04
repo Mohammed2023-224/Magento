@@ -85,7 +85,6 @@ public class ListenerHelpers {
     public static void runFile(String path) {
         File file = new File(path);
         file.setExecutable(true);
-        file.canExecute();
         if (file.canExecute()) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath());

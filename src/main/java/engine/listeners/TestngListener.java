@@ -84,11 +84,9 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     }
 
     public void onExecutionStart() {
-        CustomLogger.logger.info("start execution");
     }
 
     public void onExecutionFinish() {
-        CustomLogger.logger.info("end execution");
         ListenerHelpers.runFile(allureFile);
     }
 
