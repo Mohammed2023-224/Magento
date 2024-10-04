@@ -7,6 +7,7 @@ import org.testng.ITestNGMethod;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Set;
 
 public class ListenerHelpers {
@@ -78,6 +79,23 @@ public class ListenerHelpers {
             CustomLogger.logger.info("Deleted the file " + path);
         } catch (Exception e) {
 //            CustomLogger.logger.info("couldn't delete file " + path);
+        }
+    }
+
+    public static void runFile(String path) {
+        File file = new File(path);
+        file.setExecutable(true);
+        file.canExecute();
+        if (file.canExecute()) {
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath());
+                Process process = processBuilder.start();
+                process.waitFor();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("The file cannot be executed.");
         }
     }
 

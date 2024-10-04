@@ -20,6 +20,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     static String allurePath = FrameWorkConstants.allureDirectory;
     String testLogFile = FrameWorkConstants.testLogFile;
     String completeLogFile = FrameWorkConstants.completeLogFile;
+    String allureFile = FrameWorkConstants.allureExecutable;
 
     public void onTestStart(ITestResult result) {
         CustomLogger.logger.info("starting test: " + result.getName());
@@ -88,6 +89,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
 
     public void onExecutionFinish() {
         CustomLogger.logger.info("end execution");
+        ListenerHelpers.runFile(allureFile);
     }
 
 
