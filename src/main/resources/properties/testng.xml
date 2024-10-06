@@ -6,7 +6,7 @@
     </listeners>
     <test name="test1" parallel="false">
         <classes>
-            <class name="test"></class>
+            <class name="test.Tests"></class>
         </classes>
 
     </test>

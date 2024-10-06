@@ -1,3 +1,5 @@
+package test;
+
 import engine.dataDriven.ReadExcel;
 import engine.logger.CustomLogger;
 import org.testng.Assert;
@@ -12,7 +14,7 @@ import pages.Product;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class test extends BaseTests {
+public class Tests extends BaseTests {
     HomePage home;
     Inv inv;
     Product product;
