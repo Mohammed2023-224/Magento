@@ -6,15 +6,15 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.util.ArrayList;
-
 public class BaseTests {
     public WebDriver driver;
     public String testData = FrameWorkConstants.testData;
+    public String setup = FrameWorkConstants.testAutomationSetup;
+
 
     @BeforeClass
     public void initDriver(ITestContext context) {
-        driver = new SetupDriver().startDriver(options());
+        driver = new SetupDriver().startDriver();
         CustomLogger.logger.info(driver);
         context.setAttribute("driver", driver);
     }
@@ -24,10 +24,4 @@ public class BaseTests {
         driver.close();
     }
 
-    private String options() {
-        ArrayList<String> ops = new ArrayList<>();
-        ops.add("--start-maximized");
-//        ops.add("--headless");
-        return ops.toString().replaceAll("\\]", "").replaceAll("\\[", "");
-    }
 }

@@ -47,7 +47,6 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         AllureListener.saveTextLog(testLogFile);
         ListenerHelpers.deleteFile(testLogFile);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
-
     }
 
     @Override
@@ -89,7 +88,5 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     public void onExecutionFinish() {
         ListenerHelpers.runFile(allureFile);
     }
-
-
 }
 

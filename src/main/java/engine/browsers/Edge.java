@@ -5,16 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Edge {
     private WebDriver driver;
 
-    public WebDriver initDriver(String... options) {
+    public WebDriver initDriver(ArrayList<String> options) {
         EdgeOptions option = new EdgeOptions();
         option.addArguments(options);
-        if (options.length > 0) {
-            CustomLogger.logger.info("Start edge browser with options: " + Arrays.toString(options));
+        if (options.size() > 0) {
+            CustomLogger.logger.info("Start edge browser with options: " + options);
         } else {
             CustomLogger.logger.info("Start edge browser");
         }

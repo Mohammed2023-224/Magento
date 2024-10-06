@@ -10,13 +10,13 @@ import org.openqa.selenium.WebDriver;
 public class SetupDriver {
     public WebDriver driver;
 
-    public WebDriver startDriver(String options) {
+    public WebDriver startDriver() {
         if (FrameWorkConstants.browser.equalsIgnoreCase("edge")) {
-            return new Edge().initDriver(options);
+            return new Edge().initDriver(Options.option());
         } else if (FrameWorkConstants.browser.equalsIgnoreCase("chrome")) {
-            return new Chrome().initDriver(options);
+            return new Chrome().initDriver(Options.option());
         } else if (FrameWorkConstants.browser.equalsIgnoreCase("firefox")) {
-            return new FireFox().initDriver(options);
+            return new FireFox().initDriver(Options.option());
         } else {
             CustomLogger.logger.fatal("Can't start driver not a correct browser or not specified correctly");
             return null;

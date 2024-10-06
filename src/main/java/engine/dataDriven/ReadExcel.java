@@ -51,40 +51,6 @@ public class ReadExcel {
     }
 
 
-//    public Object[][] readDataAsHAshMapByRowName(String filePath, String sheetName, String columnName, String rowName) {
-//        //initializing variables
-//        Object[][] mainData = null;
-//        int numberOfTestCases = 0;
-//        LinkedHashMap<String, String> data;
-//        readFile(filePath, sheetName);
-//        row = sheet.getRow(0);
-//        int columnNumber = getColumnNumberFromColumnName(columnName);
-//        for (int j = 0; j < getNumberOfRows(); j++) {
-//            row = sheet.getRow(j);
-//            String condition = getCellData(row.getCell(columnNumber));
-//            if (condition.equalsIgnoreCase(rowName)) {
-//                numberOfTestCases++;
-//            }
-//        }
-//        int dataIndex = 0;
-//        mainData = new Object[numberOfTestCases][1];
-//        for (int j = 0; j < getNumberOfRows(); j++) {
-//            data = new LinkedHashMap<>();
-//            row = sheet.getRow(j);
-//            String condition = getCellData(row.getCell(columnNumber));
-//            if (condition.equalsIgnoreCase(rowName)) {
-//                for (int k = 0; k < getNumberOfColumns(); k++) {
-//                    String colValue = getCellData(sheet.getRow(0).getCell(k));
-//                    row = sheet.getRow(j);
-//                    data.put(colValue, getCellData(row.getCell(k)));
-//                }
-//                mainData[dataIndex][0] = data;
-//                dataIndex++;
-//            }
-//        }
-//        return mainData;
-//    }
-
     public String getCellData(XSSFCell cell) {
         if (cell == null) {
             return "";
@@ -268,5 +234,25 @@ public class ReadExcel {
             }
         }
         return data;
+    }
+
+
+    public String readCertainCellConditioned(String filePath, String sheetName, String conditionColumn, String condition, String rowName, String colName) {
+        readFile(filePath, sheetName);
+        CustomLogger.logger.info("Access excel file");
+        int colNum = getColumnNumberFromColumnName(conditionColumn);
+        int rowNum = getRowNumberFromRowName(rowName);
+        if (getCellData(rowNum, colNum).equalsIgnoreCase(condition.trim())) {
+            return getCellData(rowNum, colName);
+        } else {
+            return "";
+        }
+    }
+
+    public String readCertainCell(String filePath, String sheetName, String columnName, String rowName) {
+        readFile(filePath, sheetName);
+        int colNum = getColumnNumberFromColumnName(columnName);
+        int rowNum = getRowNumberFromRowName(rowName);
+        return getCellData(rowNum, colNum);
     }
 }
