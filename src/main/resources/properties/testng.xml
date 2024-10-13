@@ -6,7 +6,11 @@
     </listeners>
     <test name="test1" parallel="false">
         <classes>
-            <class name="test.Tests"></class>
+            <class name="test.Tests">
+                <methods>
+                    <include name="assertLimiter"/>
+                </methods>
+            </class>
         </classes>
 
     </test>

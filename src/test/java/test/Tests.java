@@ -2,6 +2,7 @@ package test;
 
 import engine.dataDriven.ReadExcel;
 import engine.logger.CustomLogger;
+import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -20,6 +21,7 @@ public class Tests extends BaseTests {
     Product product;
     Checkout checkout;
 
+    @Epic("First")
     @Test(dataProvider = "sorter")
     public void assertSorter(Map<String, String> data) {
         home.
@@ -33,6 +35,7 @@ public class Tests extends BaseTests {
         Assert.assertNotEquals(prodName, proName);
     }
 
+    @Epic("First")
     @Test(dataProvider = "limiter")
     public void assertLimiter(Map<String, String> data) {
         home.
@@ -46,6 +49,7 @@ public class Tests extends BaseTests {
         Assert.assertNotEquals(countA, countB);
     }
 
+    @Epic("First")
     @Test(dataProvider = "filter")
     public void assertFilters(Map<String, String> data) {
         home.
@@ -59,7 +63,7 @@ public class Tests extends BaseTests {
         Assert.assertTrue(inv.checkFiltersApplied());
     }
 
-
+    @Epic("First")
     @Test(dataProvider = "compare")
     public void checkComparePage(Map<String, String> data) {
         home.
@@ -72,6 +76,7 @@ public class Tests extends BaseTests {
         Assert.assertTrue(inv.checkComparePage());
     }
 
+    @Epic("First")
     @Test(dataProvider = "endToend")
     public void endToEnd(Map<String, String> data) {
         home.
@@ -101,7 +106,7 @@ public class Tests extends BaseTests {
         Assert.assertNotEquals(orderNumber, "");
     }
 
-
+    @Epic("First")
     @DataProvider(name = "endToend")
     private Object[] data() {
         ReadExcel r = new ReadExcel();

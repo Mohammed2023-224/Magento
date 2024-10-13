@@ -52,7 +52,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in street field {[street]}")
+    @Step("Type in street field [{street}]")
     public Checkout typeStreetField(String street) {
         ElementActions.waitExplicitly(driver, 10, street1_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, street1_txtArea, street);

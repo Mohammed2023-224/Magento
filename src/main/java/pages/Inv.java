@@ -92,6 +92,8 @@ public class Inv extends HomePage {
 
     @Step("click product {[index}]")
     public Inv clickCertainProductCompare(int index) {
+        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProduct(index)));
+        ElementActions.scrollToElement(driver, certainProduct(index));
         ElementActions.hover(driver, certainProduct(index));
         CustomLogger.logger.info("hover over product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare(index)));
@@ -104,7 +106,7 @@ public class Inv extends HomePage {
     @Step(" click on product {[name}]")
     public Inv clickCertainProduct(String name) {
         try {
-            ElementActions.waitExplicitly(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
+            ElementActions.waitExplicitly(driver, 6).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
             ElementActions.click(driver, productByName(name));
             CustomLogger.logger.info("Click on product with the name: " + name);
         } catch (Exception e) {
@@ -135,7 +137,7 @@ public class Inv extends HomePage {
 
     @Step("click on [compare]")
     public Inv clickOnCompare() {
-        ElementActions.waitExplicitly(driver, 15, compare_btn, Waits.CLICKABLE.toString());
+        ElementActions.waitExplicitly(driver, 15, compare_btn, Waits.VISIBLE.toString());
         ElementActions.click(driver, compare_btn);
         CustomLogger.logger.info("Click on compare");
         return this;
