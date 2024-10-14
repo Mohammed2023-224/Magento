@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="DynamicSuite">
+    <listeners>
+        <listener class-name="engine.listeners.TestngListener"/>
+    </listeners>
+    <test name="test">
+        <classes>
+            <class name="test.Tests"></class>
+            <class name="test.endtoend"></class> <!-- test.Tests -->
+        </classes>
+    </test> <!-- DynamicTest -->
+</suite> <!-- DynamicSuite -->

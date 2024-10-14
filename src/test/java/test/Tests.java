@@ -21,7 +21,7 @@ public class Tests extends BaseTests {
     Product product;
     Checkout checkout;
 
-    @Epic("First")
+    @Epic("Single tests")
     @Test(dataProvider = "sorter")
     public void assertSorter(Map<String, String> data) {
         home.
@@ -35,7 +35,7 @@ public class Tests extends BaseTests {
         Assert.assertNotEquals(prodName, proName);
     }
 
-    @Epic("First")
+    @Epic("Single tests")
     @Test(dataProvider = "limiter")
     public void assertLimiter(Map<String, String> data) {
         home.
@@ -49,7 +49,7 @@ public class Tests extends BaseTests {
         Assert.assertNotEquals(countA, countB);
     }
 
-    @Epic("First")
+    @Epic("Single tests")
     @Test(dataProvider = "filter")
     public void assertFilters(Map<String, String> data) {
         home.
@@ -63,7 +63,7 @@ public class Tests extends BaseTests {
         Assert.assertTrue(inv.checkFiltersApplied());
     }
 
-    @Epic("First")
+    @Epic("Single tests")
     @Test(dataProvider = "compare")
     public void checkComparePage(Map<String, String> data) {
         home.
@@ -74,43 +74,6 @@ public class Tests extends BaseTests {
                 .countComparedItems();
         inv.clickOnCompare();
         Assert.assertTrue(inv.checkComparePage());
-    }
-
-    @Epic("First")
-    @Test(dataProvider = "endToend")
-    public void endToEnd(Map<String, String> data) {
-        home.
-                navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
-        inv.clickCertainProduct(data.get("productname"));
-        product.typeQuantity(data.get("quantity"))
-                .chooseSize(data.get("size"))
-                .chooseColor(data.get("color"))
-                .clickAddToCart()
-                .clickOnCart()
-                .clickOnCheckOut();
-        checkout
-                .typeNameField(data.get("name"))
-                .typeLastNameField(data.get("lastname"))
-                .typeStreetField(data.get("street"))
-                .typeEmailField(data.get("email"))
-                .typeCityField(data.get("city"))
-                .typePostalCodeField(data.get("postal"))
-                .chooseCountry(data.get("country"), 2)
-                .typePhoneField(data.get("phone"))
-                .chooseDelivery()
-                .clickNextButton()
-                .clickPlaceOrderButton()
-                .checkOrder();
-        String orderNumber = checkout.getOrderNumber();
-        Assert.assertNotEquals(orderNumber, "");
-    }
-
-    @Epic("First")
-    @DataProvider(name = "endToend")
-    private Object[] data() {
-        ReadExcel r = new ReadExcel();
-        return r.readDataHashMapByRowCondition(testData, "EndToEnd", "LinkScript", "lnk0001");
     }
 
     @DataProvider(name = "compare")
