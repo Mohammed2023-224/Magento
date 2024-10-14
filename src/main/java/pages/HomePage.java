@@ -37,7 +37,7 @@ public class HomePage {
         return this;
     }
 
-    @Step("Navigate to {[crit]}")
+    @Step("Navigate to [{crit}] numbered [{index}]")
     public HomePage navigateBetweenLinks(String crit, int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.presenceOfElementLocated(navigationOptions(crit, index)));
         BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, navigationOptions(crit, index), "href"));

@@ -59,6 +59,7 @@ public class Inv extends HomePage {
         return ElementActions.countElements(driver, comparedItems);
     }
 
+    @Step("count products")
     public int countProducts() {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
         int counting = ElementActions.countElements(driver, allProducts);
@@ -137,7 +138,8 @@ public class Inv extends HomePage {
 
     @Step("click on [compare]")
     public Inv clickOnCompare() {
-        ElementActions.waitExplicitly(driver, 15, compare_btn, Waits.VISIBLE.toString());
+        ElementActions.waitExplicitly(driver, 5, compare_btn, Waits.VISIBLE.toString());
+        ElementActions.scrollToElement(driver, compare_btn);
         ElementActions.click(driver, compare_btn);
         CustomLogger.logger.info("Click on compare");
         return this;

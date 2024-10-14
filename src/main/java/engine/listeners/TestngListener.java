@@ -30,7 +30,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     public void onTestSuccess(ITestResult result) {
         CustomLogger.logger.info("Test success hooray: " + result.getName());
         success.add(result.getName());
-        AllureListener.saveLog(testLogFile);
+        AllureListener.saveTextLog(testLogFile);
         ListenerHelpers.deleteFile(testLogFile);
         successfulTestCases++;
     }
@@ -44,7 +44,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         //screenshot in allure report
         AllureListener.saveScreenShot(mainDriver, result.getName() + " failure screenshot ");
         retry(result);
-        AllureListener.saveLog(testLogFile);
+        AllureListener.saveTextLog(testLogFile);
         ListenerHelpers.deleteFile(testLogFile);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
     }
