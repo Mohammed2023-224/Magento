@@ -6,8 +6,9 @@
     </listeners>
     <test name="test">
         <classes>
+            <class name="test.endtoendTests"></class>
             <class name="test.Tests"></class>
-            <class name="test.endtoend"></class> <!-- test.Tests -->
+            <!-- test.Tests -->
         </classes>
     </test> <!-- DynamicTest -->
 </suite> <!-- DynamicSuite -->

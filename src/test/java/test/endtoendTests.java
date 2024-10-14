@@ -13,7 +13,7 @@ import pages.Product;
 
 import java.util.Map;
 
-public class endtoend extends BaseTests {
+public class endtoendTests extends BaseTests {
     HomePage home;
     Inv inv;
     Product product;
