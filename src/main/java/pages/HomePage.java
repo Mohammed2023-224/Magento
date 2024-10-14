@@ -71,7 +71,7 @@ public class HomePage {
         return this;
     }
 
-    @Step("Type in search bar {[text]} and click [enter]")
+    @Step("Type in search bar [{text}] and click [enter]")
     public HomePage typeSearchBar(String text) {
         ElementActions.type(driver, search_txtArea, text);
         ElementActions.clickEnter(driver, search_txtArea);

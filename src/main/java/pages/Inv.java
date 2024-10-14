@@ -53,7 +53,7 @@ public class Inv extends HomePage {
         return By.xpath("(//ol[@class='products list items product-items']//li//div[@class='actions-secondary']//a[@class='action tocompare'])[" + index + "]");
     }
 
-
+    @Step("count compared items")
     public int countComparedItems() {
         CustomLogger.logger.info("Count compared items");
         return ElementActions.countElements(driver, comparedItems);
@@ -67,13 +67,14 @@ public class Inv extends HomePage {
         return counting;
     }
 
+    @Step("get product names")
     public ArrayList<String> getProductsNames() {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
         CustomLogger.logger.info("get Product names in an array list");
         return ElementActions.getTextFromListOfElements(driver, allProductsNames);
     }
 
-    @Step("choose limiter index {[index}]")
+    @Step("choose limiter index [{index}]")
     public Inv chooseLimiter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(limiter));
         ElementActions.handleSelection(driver, limiter, index);
@@ -82,7 +83,7 @@ public class Inv extends HomePage {
         return this;
     }
 
-    @Step("choose sorter index {[index}]")
+    @Step("choose sorter index [{index}]")
     public Inv chooseSorter(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(sorter));
         ElementActions.handleSelection(driver, sorter, index);
@@ -91,7 +92,7 @@ public class Inv extends HomePage {
         return this;
     }
 
-    @Step("click product {[index}]")
+    @Step("click product [{index}]")
     public Inv clickCertainProductCompare(int index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProduct(index)));
         ElementActions.scrollToElement(driver, certainProduct(index));
@@ -104,7 +105,7 @@ public class Inv extends HomePage {
         return this;
     }
 
-    @Step(" click on product {[name}]")
+    @Step(" click on product [{name}]")
     public Inv clickCertainProduct(String name) {
         try {
             ElementActions.waitExplicitly(driver, 6).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
@@ -117,7 +118,7 @@ public class Inv extends HomePage {
         return this;
     }
 
-    @Step("choose filter {[filterType}]")
+    @Step("choose filter [{filterType}]")
     public Inv clickOnFilter(String filterType) {
         try {
             ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionFilters(filterType)));

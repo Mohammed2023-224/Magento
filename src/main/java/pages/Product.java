@@ -3,6 +3,7 @@ package pages;
 import engine.action.ElementActions;
 import engine.enums.Waits;
 import engine.logger.CustomLogger;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -36,6 +37,7 @@ public class Product extends HomePage {
         return By.xpath("(//div[@class='swatch-attribute color']//div[@class='swatch-option color'])[" + index + "]");
     }
 
+    @Step("click [Add to cart] btn")
     public Product clickAddToCart() {
         ElementActions.useJavaExecutorToClick(driver, addToCart_btn);
         ElementActions.waitExplicitly(driver, 5, addProductMessage, Waits.VISIBLE.toString());
@@ -43,6 +45,7 @@ public class Product extends HomePage {
         return this;
     }
 
+    @Step("Type quantity: [{text}]")
     public Product typeQuantity(String text) {
         ElementActions.waitExplicitly(driver, 5, qty_txtArea, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToType(driver, qty_txtArea, text);
@@ -50,6 +53,7 @@ public class Product extends HomePage {
         return this;
     }
 
+    @Step("Choose size [{size}]")
     public Product chooseSize(String size) {
         if (ElementActions.isElementDisplayed(driver, productSizeCount)) {
             try {
@@ -66,6 +70,7 @@ public class Product extends HomePage {
         return this;
     }
 
+    @Step("Choose color [{color}]")
     public Product chooseColor(String color) {
         if (ElementActions.isElementDisplayed(driver, productColorsCount)) {
             try {
@@ -88,6 +93,7 @@ public class Product extends HomePage {
         return ElementActions.getText(driver, productPrice);
     }
 
+    @Step("Get product name")
     public String getName() {
         ElementActions.waitExplicitly(driver, 5, productName, Waits.VISIBLE.toString());
         String name = ElementActions.getText(driver, productName);

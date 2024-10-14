@@ -41,7 +41,7 @@ public class Cart extends HomePage {
         return text;
     }
 
-    @Step("Type Quantity {[quantity]}")
+    @Step("Type Quantity [{quantity}]")
     public Cart typeQuantity(String quantity) {
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(quantity_txtArea));
         ElementActions.type(driver, proceed_Btn, quantity);

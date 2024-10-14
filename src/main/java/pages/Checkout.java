@@ -34,7 +34,7 @@ public class Checkout extends HomePage {
     private final By placedOrderSuccessfully_row = By.xpath("//span[text()='Thank you for your purchase!']");
     private final By freeDelivery = By.xpath("(//input[@class='radio'])[1]");
 
-    @Step("Type in email field {[email]}")
+    @Step("Type in email field [{email}]")
     public Checkout typeEmailField(String email) {
         ElementActions.waitExplicitly(driver, 10, emailField_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, emailField_txtArea, email);
@@ -44,7 +44,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in name field {[name]}")
+    @Step("Type in name field [{name}]")
     public Checkout typeNameField(String name) {
         ElementActions.waitExplicitly(driver, 10, nameField_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, nameField_txtArea, name);
@@ -60,7 +60,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in city field {[city]}")
+    @Step("Type in city field [{city}]")
     public Checkout typeCityField(String city) {
         ElementActions.waitExplicitly(driver, 10, city_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, city_txtArea, city);
@@ -68,7 +68,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in last Name field {[lastName]}")
+    @Step("Type in last Name field [{lastName}]")
     public Checkout typeLastNameField(String lastName) {
         ElementActions.waitExplicitly(driver, 10, lastname_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, lastname_txtArea, lastName);
@@ -76,7 +76,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in phone field {[phone]}")
+    @Step("Type in phone field [{phone}]")
     public Checkout typePhoneField(String phone) {
         ElementActions.waitExplicitly(driver, 10, telephone_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, telephone_txtArea, phone);
@@ -86,7 +86,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Type in postal code field {[postal]}")
+    @Step("Type in postal code field [{postal}]")
     public Checkout typePostalCodeField(String postal) {
         ElementActions.waitExplicitly(driver, 2, postcode_txtArea, Waits.VISIBLE.toString());
         ElementActions.type(driver, postcode_txtArea, postal);
@@ -94,7 +94,7 @@ public class Checkout extends HomePage {
         return this;
     }
 
-    @Step("Choose country {[country]}")
+    @Step("Choose country [{country}]")
     public Checkout chooseCountry(String text, int index) {
         ElementActions.waitExplicitly(driver, 3, country_id_ddl, Waits.VISIBLE.toString());
         try {
