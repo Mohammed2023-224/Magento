@@ -7,6 +7,7 @@ import engine.logger.CustomLogger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
@@ -21,6 +22,12 @@ public class BaseTests {
         CustomLogger.logger.info(driver);
         context.setAttribute("driver", driver);
 
+    }
+
+    @AfterMethod
+    public void refreshAndDeleteCookies() {
+        driver.manage().deleteAllCookies();
+        CustomLogger.logger.info("delete all cookies");
     }
 
     @AfterClass
