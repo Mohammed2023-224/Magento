@@ -21,7 +21,6 @@ public class Tests extends BaseTests {
     Product product;
     Checkout checkout;
 
-    // tetss
     @Epic("Single tests")
     @Test(dataProvider = "sorter")
     public void assertSorter(Map<String, String> data) {
