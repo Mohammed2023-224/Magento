@@ -74,7 +74,7 @@ public class Product extends HomePage {
     public Product chooseColor(String color) {
         if (ElementActions.isElementDisplayed(driver, productColorsCount)) {
             try {
-                ElementActions.waitExplicitly(driver, 2, productColors(color), Waits.VISIBLE.toString());
+                ElementActions.waitExplicitly(driver, 8, productColors(color), Waits.VISIBLE.toString());
                 ElementActions.click(driver, productColors(color));
                 CustomLogger.logger.info("chose color: " + color);
             } catch (Exception e) {
