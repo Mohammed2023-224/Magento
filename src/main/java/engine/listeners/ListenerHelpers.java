@@ -34,7 +34,8 @@ public class ListenerHelpers {
         String[] methodNames = new String[li.size()];
         int i = 0;
         for (ITestNGMethod method : li) {
-            methodNames[i++] = method.getMethodName();
+            methodNames[i] = method.getMethodName();
+            i++;
         }
         return methodNames;
     }
@@ -44,7 +45,8 @@ public class ListenerHelpers {
         String[] methodNames = new String[li.size()];
         int i = 0;
         for (ITestNGMethod method : li) {
-            methodNames[i++] = method.getMethodName();
+            methodNames[i] = method.getMethodName();
+            i++;
         }
         return methodNames;
     }
@@ -78,7 +80,7 @@ public class ListenerHelpers {
             FileUtils.forceDelete(file);
             CustomLogger.logger.info("Deleted the file " + path);
         } catch (Exception e) {
-//            CustomLogger.logger.info("couldn't delete file " + path);
+            //
         }
     }
 

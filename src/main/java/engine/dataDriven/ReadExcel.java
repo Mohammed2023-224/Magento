@@ -165,38 +165,6 @@ public class ReadExcel {
         return sheet;
     }
 
-//    private int getColumnNumberFromColumnNameAndRowNum(String columnName, int rowNum) {
-//        if (sheet == null) {
-//            return -1;
-//        }
-//        row = sheet.getRow(rowNum);
-//        if (row == null) {
-//            return -1; // return -1 if the first row is null
-//        }
-//        for (int i = 0; i < getNumberOfColumns(); i++) {
-//            if (getCellData().equalsIgnoreCase(columnName)) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
-//
-//    private int getRowNumberFromRowNameAndColumnNum(String rowName, int columnNumber) {
-//        if (sheet == null) {
-//            return -1;
-//        }
-//        for (int i = 0; i < getNumberOfRows(); i++) {
-//            row = sheet.getRow(i);
-//            if (row == null || row.getCell(0) == null) {
-//                continue; // skip null rows and cells
-//            }
-//            if (getCellData().equalsIgnoreCase(rowName)) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
-
     public Object[][] readDataHashMapByRowCondition(String fileName, String sheetName, String column, String rowCondtion) {
         //init variables
         LinkedHashMap<String, String> table;

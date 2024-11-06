@@ -43,8 +43,8 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         ScreenshotManager.takeScreenShotFolder(mainDriver, result.getName());
         //screenshot in allure report
         AllureListener.saveScreenShot(mainDriver, result.getName() + " failure screenshot ");
-        retry(result);
         AllureListener.saveTextLog(testLogFile);
+        retry(result);
         ListenerHelpers.deleteFile(testLogFile);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
     }
@@ -86,7 +86,10 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     }
 
     public void onExecutionFinish() {
-        ListenerHelpers.runFile(allureFile);
+        if (FrameWorkConstants.openAllure.equalsIgnoreCase("true")) {
+            CustomLogger.logger.info("test");
+            ListenerHelpers.runFile(allureFile);
+        }
     }
 }
 

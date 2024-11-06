@@ -21,7 +21,6 @@ public class BaseTests {
         driver = new SetupDriver().startDriver();
         CustomLogger.logger.info(driver);
         context.setAttribute("driver", driver);
-
     }
 
     @AfterMethod

@@ -14,7 +14,7 @@
         <console name="console log" target="SYSTEM_OUT">
             <PatternLayout pattern="${consolePattern}"/>
         </console>
-        <RollingFile name="my file" fileName="${filePath}firstLog.log" filePattern="${filePath}${filePathPattern}.log">
+        <RollingFile name="my file" fileName="${filePath}MainLog.log" filePattern="${filePath}${filePathPattern}.log">
             <PatternLayout pattern="${filePattern}"/>
             <!--<LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/> -->
             <SizeBasedTriggeringPolicy size="10MB"></SizeBasedTriggeringPolicy>
@@ -26,7 +26,7 @@
             </DefaultRolloverStrategy>
         </RollingFile>
         <RollingFile name="my logs" fileName="${filePath}/testLogs/myLogs.log"
-                     filePattern="${filePath}${filePathPattern}.log">
+                     filePattern="${filePath}/testLogs/${filePathPattern}.log">
             <PatternLayout pattern="${filePattern}"/>
             <SizeBasedTriggeringPolicy size="10MB"></SizeBasedTriggeringPolicy>
             <DefaultRolloverStrategy max="3">
@@ -39,9 +39,9 @@
     </Appenders>
     <Loggers>
         <Logger name="logger" level="info" additivity="false">
-            <appender-ref ref="my file"/>
+            <AppenderRef ref="my file"/>
             <AppenderRef ref="console log"/>
-            <appender-ref ref="my logs"/>
+            <AppenderRef ref="my logs"/>
         </Logger>
         <Root level="info" additivity="false">
             <appender-ref ref="my file"/>
