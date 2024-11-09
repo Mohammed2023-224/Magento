@@ -23,4 +23,18 @@ public class SetupDriver {
         }
     }
 
+
+    public WebDriver startDriverWhenAllIsChosen(String browser) {
+        if (browser.equalsIgnoreCase("edge")) {
+            return new Edge().initDriver(Options.option());
+        } else if (browser.equalsIgnoreCase("chrome")) {
+            return new Chrome().initDriver(Options.option());
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            return new FireFox().initDriver(Options.option());
+        } else {
+            CustomLogger.logger.fatal("Can't start driver not a correct browser or not specified correctly");
+            return null;
+        }
+    }
+
 }

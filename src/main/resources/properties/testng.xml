@@ -4,9 +4,26 @@
     <listeners>
         <listener class-name="engine.listeners.TestngListener"/>
     </listeners>
-    <test name="test">
+    <test name="test Chrome">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="test.endtoendTests"></class>
+            <!--            <class name="test.endtoendTests"></class>-->
+            <class name="test.Tests"></class>
+            <!-- test.Tests -->
+        </classes>
+    </test> <!-- DynamicTest -->
+    <test name="test Edge">
+        <parameter name="browser" value="edge"></parameter>
+        <classes>
+            <!--            <class name="test.endtoendTests"></class>-->
+            <class name="test.Tests"></class>
+            <!-- test.Tests -->
+        </classes>
+    </test> <!-- DynamicTest -->
+    <test name="test Firefox">
+        <parameter name="browser" value="firefox"></parameter>
+        <classes>
+            <!--            <class name="test.endtoendTests"></class>-->
             <class name="test.Tests"></class>
             <!-- test.Tests -->
         </classes>
