@@ -77,12 +77,13 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     }
 
     public void onStart(ITestContext context) {
-        ListenerHelpers.deleteFile(completeLogFile);
-        ListenerHelpers.deleteDirectory(allurePath);
-        ListenerHelpers.deleteFile(testLogFile);
+
     }
 
     public void onExecutionStart() {
+        ListenerHelpers.deleteFile(completeLogFile);
+        ListenerHelpers.deleteDirectory(allurePath);
+        ListenerHelpers.deleteFile(testLogFile);
     }
 
     public void onExecutionFinish() {
