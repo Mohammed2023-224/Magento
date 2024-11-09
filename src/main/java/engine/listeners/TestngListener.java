@@ -88,7 +88,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
 
     public void onExecutionFinish() {
         if (FrameWorkConstants.openAllure.equalsIgnoreCase("true")) {
-            CustomLogger.logger.info("test");
+            CustomLogger.logger.info("start allure report pls don't stop the execution");
             ListenerHelpers.runFile(allureFile);
         }
     }
