@@ -45,3 +45,4 @@ build/
 /src/main/resources/META-INF/maven/archetype.xml
 /src/main/resources/archetype-resources/pom.xml
 
+/test-output/
