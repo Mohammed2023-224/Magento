@@ -16,10 +16,18 @@ public class BaseTests {
     @BeforeClass
     @Parameters("browser")
     public void initDriver(ITestContext context, @Optional("edge") String browser) {
-        if (FrameWorkConstants.browser.equalsIgnoreCase("all")) {
-            driver = new SetupDriver().startDriverWhenAllIsChosen(browser);
+        if (FrameWorkConstants.destination.equalsIgnoreCase("local")) {
+            if (FrameWorkConstants.browser.equalsIgnoreCase("all")) {
+                driver = new SetupDriver().startDriverWhenAllIsChosen(browser);
+            } else {
+                driver = new SetupDriver().startDriver();
+            }
         } else {
-            driver = new SetupDriver().startDriver();
+            if (FrameWorkConstants.browser.equalsIgnoreCase("all")) {
+                driver = new SetupDriver().startDriverRemotelyWhenAllIsChosen(browser);
+            } else {
+                driver = new SetupDriver().startDriverRemotely();
+            }
         }
         CustomLogger.logger.info(driver);
         context.setAttribute("driver", driver);

@@ -29,6 +29,7 @@ public class FrameWorkConstants {
     public static String disableDevSHM = r.readCertainCell(testAutomationSetup, "sheet", "Value", "Disable Dev Shm Usage");
     public static String browser = r.readCertainCell(testAutomationSetup, "sheet", "Value", "Browser");
     public static String openAllure = r.readCertainCell(testAutomationSetup, "sheet", "Value", "Open allure");
+    public static String destination = r.readCertainCell(testAutomationSetup, "sheet", "Value", "Proxy");
 
 
 }
