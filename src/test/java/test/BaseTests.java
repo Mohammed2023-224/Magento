@@ -41,7 +41,7 @@ public class BaseTests {
 
     @AfterClass
     public void tearDriver() {
-        driver.close();
+        driver.quit();
     }
 
 }

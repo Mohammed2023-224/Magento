@@ -28,7 +28,7 @@ public class SetupDriver {
     }
 
     public WebDriver startDriverRemotely() {
-        String url = "http://localhost:4444/ui/";
+        String url = "http://localhost:4444/wd/hub";
         if (FrameWorkConstants.browser.equalsIgnoreCase("edge")) {
             try {
                 return new RemoteWebDriver(new URL(url), new Edge().edgeOptions(Options.option()));
@@ -55,7 +55,7 @@ public class SetupDriver {
 
 
     public WebDriver startDriverRemotelyWhenAllIsChosen(String browser) {
-        String url = "http://localhost:4444/ui/";
+        String url = "http://localhost:4444/wd/hub";
         if (browser.equalsIgnoreCase("edge")) {
             try {
                 return new RemoteWebDriver(new URL(url), new Edge().edgeOptions(Options.option()));

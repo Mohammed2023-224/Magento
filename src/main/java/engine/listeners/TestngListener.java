@@ -74,6 +74,7 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         CustomLogger.logger.info(successfulTestCases + " test cases successful " + success);
         CustomLogger.logger.info(failedTestCases + " test cases failed" + Arrays.toString(ListenerHelpers.getFailedTestMethodNames(context)));
         CustomLogger.logger.info(skippedTestCases + " test cases skipped" + Arrays.toString(ListenerHelpers.getSkippedTestMethodNames(context)));
+        ListenerHelpers.deleteFile(testLogFile);
     }
 
     public void onStart(ITestContext context) {
@@ -83,7 +84,6 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     public void onExecutionStart() {
         ListenerHelpers.deleteFile(completeLogFile);
         ListenerHelpers.deleteDirectory(allurePath);
-        ListenerHelpers.deleteFile(testLogFile);
     }
 
     public void onExecutionFinish() {
