@@ -24,7 +24,7 @@ public class HomePage {
     private final By viewAndEditCart = By.xpath("//span[text()='View and Edit Cart']");
     private By cartTotal = By.xpath("//div[@class='items-total']");
 
-    private By navigationOptions(String criteria, int index) {
+    private By navigationOptions(String criteria, double index) {
         return By.xpath("(//div[@id='store.menu']//span[text()=\"" + criteria + "\"])[" + index + "]/parent::a");
 
     }
@@ -33,14 +33,14 @@ public class HomePage {
     public HomePage navigationToWebSite() {
         driver.get(FrameWorkConstants.url);
         ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(logo));
-        CustomLogger.logger.info("Navigate to: " + FrameWorkConstants.url);
+        CustomLogger.logger.info("Navigate to: {}", FrameWorkConstants.url);
         return this;
     }
 
     @Step("Navigate to [{crit}] numbered [{index}]")
-    public HomePage navigateBetweenLinks(String crit, int index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.presenceOfElementLocated(navigationOptions(crit, index)));
-        BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, navigationOptions(crit, index), "href"));
+    public HomePage navigateBetweenLinks(String crit, double index) {
+        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.presenceOfElementLocated(navigationOptions(crit, (int) index)));
+        BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, navigationOptions(crit, (int) index), "href"));
         CustomLogger.logger.info("Navigate to sub link: " + crit + " with occurence number: " + index);
         return this;
     }

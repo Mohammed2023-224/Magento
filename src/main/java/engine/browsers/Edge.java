@@ -13,9 +13,9 @@ public class Edge {
 
     public EdgeOptions edgeOptions(ArrayList<String> options) {
         EdgeOptions option = new EdgeOptions();
-        option.addArguments(options);
         if (options.size() > 0) {
-            CustomLogger.logger.info("Start edge browser with options: " + options);
+            CustomLogger.logger.info("Start edge browser with options: {}", options);
+            option.addArguments(options);
         } else {
             CustomLogger.logger.info("Start edge browser");
         }

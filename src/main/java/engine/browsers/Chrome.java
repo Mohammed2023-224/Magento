@@ -13,9 +13,9 @@ public class Chrome {
 
     public ChromeOptions chromeOptions(ArrayList<String> options) {
         ChromeOptions option = new ChromeOptions();
-        option.addArguments(options);
         if (options.size() > 0) {
-            CustomLogger.logger.info("Start chrome browser with options: " + options);
+            CustomLogger.logger.info("Start chrome browser with options: {}", options);
+            option.addArguments(options);
         } else {
             CustomLogger.logger.info("Start chrome browser");
         }

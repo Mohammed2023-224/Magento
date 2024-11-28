@@ -13,9 +13,9 @@ public class FireFox {
 
     public FirefoxOptions firefoxOptions(ArrayList<String> options) {
         FirefoxOptions option = new FirefoxOptions();
-        option.addArguments(options);
         if (options.size() > 0) {
-            CustomLogger.logger.info("Start firefox browser with options: " + options);
+            CustomLogger.logger.info("Start firefox browser with options: {}", options);
+            option.addArguments(options);
         } else {
             CustomLogger.logger.info("Start firefox browser");
         }

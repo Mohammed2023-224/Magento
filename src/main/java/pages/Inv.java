@@ -75,16 +75,16 @@ public class Inv extends HomePage {
     }
 
     @Step("choose limiter index [{index}]")
-    public Inv chooseLimiter(int index) {
+    public Inv chooseLimiter(double index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(limiter));
-        ElementActions.handleSelection(driver, limiter, index);
+        ElementActions.handleSelection(driver, limiter, (int) index);
         CustomLogger.logger.info("Choose limiter indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProducts));
         return this;
     }
 
     @Step("choose sorter index [{index}]")
-    public Inv chooseSorter(int index) {
+    public Inv chooseSorter(double index) {
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(sorter));
         ElementActions.handleSelection(driver, sorter, index);
         CustomLogger.logger.info("Choose sorter indexed: " + index);
@@ -93,13 +93,13 @@ public class Inv extends HomePage {
     }
 
     @Step("click product [{index}]")
-    public Inv clickCertainProductCompare(int index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProduct(index)));
-        ElementActions.scrollToElement(driver, certainProduct(index));
-        ElementActions.hover(driver, certainProduct(index));
+    public Inv clickCertainProductCompare(double index) {
+        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProduct((int) index)));
+        ElementActions.scrollToElement(driver, certainProduct((int) index));
+        ElementActions.hover(driver, certainProduct((int) index));
         CustomLogger.logger.info("hover over product indexed: " + index);
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare(index)));
-        ElementActions.click(driver, certainProductCompare(index));
+        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare((int) index)));
+        ElementActions.click(driver, certainProductCompare((int) index));
         CustomLogger.logger.info("click on product compare button for product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(addedMessage));
         return this;

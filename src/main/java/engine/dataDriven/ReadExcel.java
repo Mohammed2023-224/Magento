@@ -2,7 +2,6 @@ package engine.dataDriven;
 
 
 import engine.logger.CustomLogger;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -33,43 +32,31 @@ public class ReadExcel {
             is = new FileInputStream(filePath);
             workbook = new XSSFWorkbook(is);
         } catch (IOException e) {
-            CustomLogger.logger.fatal("Couldn't find the file at: " + filePath);
+            CustomLogger.logger.fatal("Can't find the file at: {}", filePath);
         }
         sheet = switchToSheet(sheetName);
     }
-
-
-    public String readData(String filePath, String sheetName, String rowName, String columnName) {
-        try {
-            is = new FileInputStream(filePath);
-            workbook = new XSSFWorkbook(is);
-        } catch (IOException e) {
-            CustomLogger.logger.fatal("Couldn't find the file at: " + filePath);
-        }
-        sheet = switchToSheet(sheetName);
-        return getCellData(rowName, columnName);
-    }
-
 
     public String getCellData(XSSFCell cell) {
         if (cell == null) {
             return "";
-        } else {
-            if (cell.getCellType() == CellType.BOOLEAN) {
+        }
+        switch (cell.getCellType()) {
+            case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
-            } else if (cell.getCellType() == CellType.STRING) {
+            case STRING:
                 return cell.getStringCellValue();
-            } else if (cell.getCellType() == CellType.NUMERIC) {
+            case NUMERIC:
+                // Optionally, format the numeric value
                 double numericValue = cell.getNumericCellValue();
-                int intValue = (int) numericValue;
-                return String.valueOf(intValue);
-            } else if (cell.getCellType() == CellType.FORMULA) {
+                return String.valueOf(numericValue);
+            case FORMULA:
                 return String.valueOf(cell.getCellFormula());
-            } else if (cell.getCellType() == CellType._NONE || cell.getCellType() == CellType.BLANK) {
+            case BLANK:
+            case _NONE:
                 return "";
-            } else {
+            default:
                 return "";
-            }
         }
     }
 
@@ -177,15 +164,15 @@ public class ReadExcel {
         row = sheet.getRow(0);
         //iterate over rows in a column with the name column(parameter) and when the cell is equal to row condition add 1 to tests
         for (int i = 0; i < getNumberOfRows(); i++) {
-            if (rowCondtion.equalsIgnoreCase(getCellData(i, column))) {
+            if (row != null && rowCondtion.equalsIgnoreCase(getCellData(i, column))) {
                 numberOfTests++;
             }
         }
         if (numberOfTests == 0) {
-            CustomLogger.logger.error("No data found at file located: " + fileName);
+            CustomLogger.logger.error("No data found at file located: {}", fileName);
             Assert.fail("No data found that matches the row condition: " + rowCondtion);
         }
-        CustomLogger.logger.info("number of test cases = " + numberOfTests);
+        CustomLogger.logger.info("number of test cases = {}", numberOfTests);
         data = new Object[numberOfTests][1];
         //iterate over all rows
         for (int i = 0; i < getNumberOfRows(); i++) {
@@ -202,19 +189,6 @@ public class ReadExcel {
             }
         }
         return data;
-    }
-
-
-    public String readCertainCellConditioned(String filePath, String sheetName, String conditionColumn, String condition, String rowName, String colName) {
-        readFile(filePath, sheetName);
-        CustomLogger.logger.info("Access excel file");
-        int colNum = getColumnNumberFromColumnName(conditionColumn);
-        int rowNum = getRowNumberFromRowName(rowName);
-        if (getCellData(rowNum, colNum).equalsIgnoreCase(condition.trim())) {
-            return getCellData(rowNum, colName);
-        } else {
-            return "";
-        }
     }
 
     public String readCertainCell(String filePath, String sheetName, String columnName, String rowName) {

@@ -27,10 +27,10 @@ public class Tests extends BaseTests {
     public void assertSorter(Map<String, String> data) {
         home.
                 navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
+                .navigateBetweenLinks(data.get("link"), Double.parseDouble(data.get("linkoccur")));
         ArrayList<String> proName = inv.getProductsNames();
         CustomLogger.logger.info(proName);
-        inv.chooseSorter(Integer.parseInt(data.get("sorter")));
+        inv.chooseSorter(Double.parseDouble(data.get("sorter")));
         ArrayList<String> prodName = inv.getProductsNames();
         CustomLogger.logger.info(prodName);
         Assert.assertNotEquals(prodName, proName);
@@ -41,10 +41,10 @@ public class Tests extends BaseTests {
     public void assertLimiter(Map<String, String> data) {
         home.
                 navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
+                .navigateBetweenLinks(data.get("link"), Double.parseDouble(data.get("linkoccur")));
         int countB = inv.countProducts();
         CustomLogger.logger.info(countB);
-        inv.chooseLimiter(Integer.parseInt(data.get("limiter")));
+        inv.chooseLimiter(Double.parseDouble(data.get("limiter")));
         int countA = inv.countProducts();
         CustomLogger.logger.info(countA);
         Assert.assertNotEquals(countA, countB);
@@ -55,7 +55,7 @@ public class Tests extends BaseTests {
     public void assertFilters(Map<String, String> data) {
         home.
                 navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
+                .navigateBetweenLinks(data.get("link"), Double.parseDouble(data.get("linkoccur")));
         ArrayList<String> proName = inv.getProductsNames();
         CustomLogger.logger.info(proName);
         inv.clickOnFilter("XS");
@@ -69,9 +69,9 @@ public class Tests extends BaseTests {
     public void checkComparePage(Map<String, String> data) {
         home.
                 navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
-        inv.clickCertainProductCompare(Integer.parseInt(data.get("firstcompareitem")))
-                .clickCertainProductCompare(Integer.parseInt(data.get("secondcompareitem")))
+                .navigateBetweenLinks(data.get("link"), Double.parseDouble(data.get("linkoccur")));
+        inv.clickCertainProductCompare(Double.parseDouble(data.get("firstcompareitem")))
+                .clickCertainProductCompare(Double.parseDouble(data.get("secondcompareitem")))
                 .countComparedItems();
         inv.clickOnCompare();
         Assert.assertTrue(inv.checkComparePage());

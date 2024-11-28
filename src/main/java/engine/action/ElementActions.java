@@ -108,11 +108,11 @@ public class ElementActions {
         }
     }
 
-    public static void handleSelection(WebDriver driver, By locator, int index) {
+    public static void handleSelection(WebDriver driver, By locator, double index) {
         scrollToElement(driver, locator);
         Select select = new Select(driver.findElement(locator));
         CustomLogger.logger.info("choose option by index: " + index);
-        select.selectByIndex(index);
+        select.selectByIndex((int) index);
     }
 
     public static void handleSelection(WebDriver driver, By locator, String value) {

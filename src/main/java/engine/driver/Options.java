@@ -13,16 +13,15 @@ public class Options {
         if (FrameWorkConstants.maximized.equalsIgnoreCase("true")) {
             options.add("--start-maximized");
         }
-        if (FrameWorkConstants.extensions == "true") {
+        if (FrameWorkConstants.extensions.equalsIgnoreCase("true")) {
             options.add("--disable-extensions");
         }
-        if (FrameWorkConstants.noSandBox == "true") {
+        if (FrameWorkConstants.noSandBox.equalsIgnoreCase("true")) {
             options.add("--no-sandbox");
         }
-        if (FrameWorkConstants.disableDevSHM == "true") {
+        if (FrameWorkConstants.disableDevSHM.equalsIgnoreCase("true")) {
             options.add("--disable-dev-shm-usage");
         }
-
         return options;
     }
 }

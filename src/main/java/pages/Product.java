@@ -58,10 +58,10 @@ public class Product extends HomePage {
         if (ElementActions.isElementDisplayed(driver, productSizeCount)) {
             try {
                 ElementActions.waitExplicitly(driver, 2, productSizes(size), Waits.VISIBLE.toString());
-                ElementActions.click(driver, productSizes(size));
+                ElementActions.useJavaExecutorToClick(driver, productSizes(size));
                 CustomLogger.logger.info("Choose size: " + size);
             } catch (Exception e) {
-                ElementActions.click(driver, productSizes(1));
+                ElementActions.useJavaExecutorToClick(driver, productSizes(1));
                 CustomLogger.logger.info("Choose first size in the list");
             }
         } else {
@@ -76,10 +76,11 @@ public class Product extends HomePage {
             try {
                 ElementActions.scrollToElement(driver, productColors(color));
                 ElementActions.waitExplicitly(driver, 8, productColors(color), Waits.VISIBLE.toString());
-                ElementActions.click(driver, productColors(color));
+                ElementActions.waitExplicitly(driver, 13, productColors(color), Waits.CLICKABLE.toString());
+                ElementActions.useJavaExecutorToClick(driver, productColors(color));
                 CustomLogger.logger.info("chose color: " + color);
             } catch (Exception e) {
-                ElementActions.click(driver, productColors(1));
+                ElementActions.useJavaExecutorToClick(driver, productColors(1));
                 CustomLogger.logger.info("Choose first color in the list");
             }
         } else {

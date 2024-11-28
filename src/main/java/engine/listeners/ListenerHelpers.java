@@ -23,8 +23,10 @@ public class ListenerHelpers {
     public static String[] getAllTestMethodNames(ITestContext context) {
         ITestNGMethod[] li = context.getAllTestMethods();
         String[] methodNames = new String[li.length];
-        for (int i = 0; i < li.length; i++) {
-            methodNames[i] = li[i].getMethodName();
+        int i = 0;
+        for (ITestNGMethod method : li) {
+            methodNames[i] = method.getMethodName();
+            i++;
         }
         return methodNames;
     }
@@ -56,7 +58,8 @@ public class ListenerHelpers {
         String[] methodNames = new String[context.size()];
         int i = 0;
         for (ITestNGMethod method : context) {
-            methodNames[i++] = method.getMethodName();
+            methodNames[i] = method.getMethodName();
+            i++;
         }
         return methodNames;
     }
@@ -66,9 +69,9 @@ public class ListenerHelpers {
         File directory = new File(path);
         try {
             FileUtils.forceDelete(directory);
-            CustomLogger.logger.info("Deleted the directory " + path);
+            CustomLogger.logger.info("Deleted the directory {}", path);
         } catch (Exception e) {
-            CustomLogger.logger.info("couldn't delete directory " + path);
+            CustomLogger.logger.info("couldn't delete directory {}", path);
         }
     }
 
@@ -78,7 +81,7 @@ public class ListenerHelpers {
             FileOutputStream fis = new FileOutputStream(path);
             fis.close();
             FileUtils.forceDelete(file);
-            CustomLogger.logger.info("Deleted the file " + path);
+            CustomLogger.logger.info("Deleted the file {}", path);
         } catch (Exception e) {
             //
         }
@@ -93,10 +96,10 @@ public class ListenerHelpers {
                 Process process = processBuilder.start();
                 process.waitFor();
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                CustomLogger.logger.info("File executed");
             }
         } else {
-            System.out.println("The file cannot be executed.");
+            CustomLogger.logger.info("cannot execute file");
         }
     }
 

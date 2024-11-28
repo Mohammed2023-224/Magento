@@ -24,7 +24,7 @@ public class endtoendTests extends BaseTests {
     public void endToEnd(Map<String, String> data) {
         home.
                 navigationToWebSite()
-                .navigateBetweenLinks(data.get("link"), Integer.parseInt(data.get("linkoccur")));
+                .navigateBetweenLinks(data.get("link"), Double.parseDouble(data.get("linkoccur")));
         inv.clickCertainProduct(data.get("productname"));
         product.typeQuantity(data.get("quantity"))
                 .chooseSize(data.get("size"))
