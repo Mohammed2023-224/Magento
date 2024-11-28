@@ -39,8 +39,9 @@ public class Product extends HomePage {
 
     @Step("click [Add to cart] btn")
     public Product clickAddToCart() {
+        ElementActions.waitExplicitly(driver, 10, addToCart_btn, Waits.VISIBLE.toString());
         ElementActions.useJavaExecutorToClick(driver, addToCart_btn);
-        ElementActions.waitExplicitly(driver, 5, addProductMessage, Waits.VISIBLE.toString());
+        ElementActions.waitExplicitly(driver, 10, addProductMessage, Waits.VISIBLE.toString());
         CustomLogger.logger.info("Click add to cart button");
         return this;
     }

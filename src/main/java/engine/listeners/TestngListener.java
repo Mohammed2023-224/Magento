@@ -51,8 +51,10 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
 
     @Override
     public boolean retry(ITestResult iTestResult) {
+        WebDriver mainDriver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
         if (counter <= retryLimit) {
             counter++;
+            mainDriver.manage().deleteAllCookies();
             CustomLogger.logger.info("ended retry number: " + counter);
             return true;
         }

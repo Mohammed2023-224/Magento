@@ -56,7 +56,9 @@ public class HomePage {
 
     @Step("Click on [checkOut]")
     public HomePage clickOnCheckOut() {
-        ElementActions.waitExplicitly(driver, 5, checkout, Waits.CLICKABLE.toString());
+        ElementActions.waitExplicitly(driver, 10, checkout, Waits.VISIBLE.toString());
+        ElementActions.scrollToElement(driver, checkout);
+        ElementActions.waitExplicitly(driver, 10, checkout, Waits.CLICKABLE.toString());
         ElementActions.useJavaExecutorToClick(driver, checkout);
         CustomLogger.logger.info("Click on checkout");
         return this;
