@@ -5,7 +5,6 @@ import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Cart extends HomePage {
     public Cart(WebDriver driver) {
@@ -19,32 +18,28 @@ public class Cart extends HomePage {
 
     @Step("Click on [proceed btn]")
     public Cart clickProccedButton() {
-        ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(proceed_Btn));
-        ElementActions.click(driver, proceed_Btn);
+        ElementActions.click(driver, proceed_Btn, 10);
         CustomLogger.logger.info("Click on proceed button");
         return this;
     }
 
     @Step("Click on [update shopping cart]")
     public Cart clickUpdatShoppingCart() {
-        ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(updateShoppingCart_Btn));
-        ElementActions.click(driver, updateShoppingCart_Btn);
+        ElementActions.click(driver, updateShoppingCart_Btn, 10);
         CustomLogger.logger.info("Click on update shopping cart");
         return this;
     }
 
     @Step("get total price")
     public String getTotalPrice() {
-        ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(total_row));
-        String text = ElementActions.getText(driver, total_row);
+        String text = ElementActions.getText(driver, total_row, 10);
         CustomLogger.logger.info("get total price: " + text);
         return text;
     }
 
     @Step("Type Quantity [{quantity}]")
     public Cart typeQuantity(String quantity) {
-        ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(quantity_txtArea));
-        ElementActions.type(driver, proceed_Btn, quantity);
+        ElementActions.type(driver, proceed_Btn, quantity, 10);
         CustomLogger.logger.info("type: " + quantity + "in quantity field");
         return this;
     }

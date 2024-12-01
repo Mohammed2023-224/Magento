@@ -2,7 +2,6 @@ package pages;
 
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
-import engine.enums.Waits;
 import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -76,8 +75,7 @@ public class Inv extends HomePage {
 
     @Step("choose limiter index [{index}]")
     public Inv chooseLimiter(double index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(limiter));
-        ElementActions.handleSelection(driver, limiter, (int) index);
+        ElementActions.handleSelection(driver, limiter, (int) index, 10);
         CustomLogger.logger.info("Choose limiter indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProducts));
         return this;
@@ -85,8 +83,7 @@ public class Inv extends HomePage {
 
     @Step("choose sorter index [{index}]")
     public Inv chooseSorter(double index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(sorter));
-        ElementActions.handleSelection(driver, sorter, index);
+        ElementActions.handleSelection(driver, sorter, index, 5);
         CustomLogger.logger.info("Choose sorter indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProductsNames));
         return this;
@@ -94,12 +91,11 @@ public class Inv extends HomePage {
 
     @Step("click product [{index}]")
     public Inv clickCertainProductCompare(double index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProduct((int) index)));
-        ElementActions.scrollToElement(driver, certainProduct((int) index));
+        ElementActions.scrollToElement(driver, certainProduct((int) index), 10);
         ElementActions.hover(driver, certainProduct((int) index));
         CustomLogger.logger.info("hover over product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare((int) index)));
-        ElementActions.click(driver, certainProductCompare((int) index));
+        ElementActions.click(driver, certainProductCompare((int) index), 6);
         CustomLogger.logger.info("click on product compare button for product indexed: " + index);
         ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(addedMessage));
         return this;
@@ -108,11 +104,10 @@ public class Inv extends HomePage {
     @Step(" click on product [{name}]")
     public Inv clickCertainProduct(String name) {
         try {
-            ElementActions.waitExplicitly(driver, 6).until(ExpectedConditions.visibilityOfElementLocated(productByName(name)));
-            ElementActions.click(driver, productByName(name));
+            ElementActions.click(driver, productByName(name), 6);
             CustomLogger.logger.info("Click on product with the name: " + name);
         } catch (Exception e) {
-            ElementActions.click(driver, certainProduct(1));
+            ElementActions.click(driver, certainProduct(1), 8);
             CustomLogger.logger.info("Click on the first product");
         }
         return this;
@@ -139,9 +134,8 @@ public class Inv extends HomePage {
 
     @Step("click on [compare]")
     public Inv clickOnCompare() {
-        ElementActions.waitExplicitly(driver, 5, compare_btn, Waits.VISIBLE.toString());
-        ElementActions.scrollToElement(driver, compare_btn);
-        ElementActions.click(driver, compare_btn);
+        ElementActions.scrollToElement(driver, compare_btn, 10);
+        ElementActions.click(driver, compare_btn, 5);
         CustomLogger.logger.info("Click on compare");
         return this;
     }

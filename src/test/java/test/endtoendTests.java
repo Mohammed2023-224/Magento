@@ -40,6 +40,7 @@ public class endtoendTests extends BaseTests {
                 .typeCityField(data.get("city"))
                 .typePostalCodeField(data.get("postal"))
                 .chooseCountry(data.get("country"), 2)
+                .chooseRegion("Arizona", 1)
                 .typePhoneField(data.get("phone"))
                 .chooseDelivery()
                 .clickNextButton()

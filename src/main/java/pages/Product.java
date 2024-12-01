@@ -39,8 +39,7 @@ public class Product extends HomePage {
 
     @Step("click [Add to cart] btn")
     public Product clickAddToCart() {
-        ElementActions.waitExplicitly(driver, 10, addToCart_btn, Waits.VISIBLE.toString());
-        ElementActions.useJavaExecutorToClick(driver, addToCart_btn);
+        ElementActions.useJavaExecutorToClick(driver, addToCart_btn, 10);
         ElementActions.waitExplicitly(driver, 10, addProductMessage, Waits.VISIBLE.toString());
         CustomLogger.logger.info("Click add to cart button");
         return this;
@@ -48,8 +47,7 @@ public class Product extends HomePage {
 
     @Step("Type quantity: [{text}]")
     public Product typeQuantity(String text) {
-        ElementActions.waitExplicitly(driver, 5, qty_txtArea, Waits.CLICKABLE.toString());
-        ElementActions.useJavaExecutorToType(driver, qty_txtArea, text);
+        ElementActions.useJavaExecutorToType(driver, qty_txtArea, text, 5);
         CustomLogger.logger.info("Type quantity: " + text);
         return this;
     }
@@ -58,11 +56,10 @@ public class Product extends HomePage {
     public Product chooseSize(String size) {
         if (ElementActions.isElementDisplayed(driver, productSizeCount)) {
             try {
-                ElementActions.waitExplicitly(driver, 2, productSizes(size), Waits.VISIBLE.toString());
-                ElementActions.useJavaExecutorToClick(driver, productSizes(size));
+                ElementActions.useJavaExecutorToClick(driver, productSizes(size), 5);
                 CustomLogger.logger.info("Choose size: " + size);
             } catch (Exception e) {
-                ElementActions.useJavaExecutorToClick(driver, productSizes(1));
+                ElementActions.useJavaExecutorToClick(driver, productSizes(1), 5);
                 CustomLogger.logger.info("Choose first size in the list");
             }
         } else {
@@ -75,13 +72,11 @@ public class Product extends HomePage {
     public Product chooseColor(String color) {
         if (ElementActions.isElementDisplayed(driver, productColorsCount)) {
             try {
-                ElementActions.scrollToElement(driver, productColors(color));
-                ElementActions.waitExplicitly(driver, 8, productColors(color), Waits.VISIBLE.toString());
-                ElementActions.waitExplicitly(driver, 13, productColors(color), Waits.CLICKABLE.toString());
-                ElementActions.useJavaExecutorToClick(driver, productColors(color));
+                ElementActions.scrollToElement(driver, productColors(color), 10);
+                ElementActions.useJavaExecutorToClick(driver, productColors(color), 5);
                 CustomLogger.logger.info("chose color: " + color);
             } catch (Exception e) {
-                ElementActions.useJavaExecutorToClick(driver, productColors(1));
+                ElementActions.useJavaExecutorToClick(driver, productColors(1), 5);
                 CustomLogger.logger.info("Choose first color in the list");
             }
         } else {
@@ -92,14 +87,14 @@ public class Product extends HomePage {
 
     public String getPrice() {
         ElementActions.waitExplicitly(driver, 5, productPrice, Waits.VISIBLE.toString());
-        CustomLogger.logger.info("get Price of: {}", ElementActions.getText(driver, productPrice));
-        return ElementActions.getText(driver, productPrice);
+        CustomLogger.logger.info("get Price of: {}", ElementActions.getText(driver, productPrice, 10));
+        return ElementActions.getText(driver, productPrice, 10);
     }
 
     @Step("Get product name")
     public String getName() {
         ElementActions.waitExplicitly(driver, 5, productName, Waits.VISIBLE.toString());
-        String name = ElementActions.getText(driver, productName);
+        String name = ElementActions.getText(driver, productName, 10);
         CustomLogger.logger.info("get Product name: " + name);
         return name;
     }

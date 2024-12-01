@@ -3,7 +3,6 @@ package pages;
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
 import engine.constants.FrameWorkConstants;
-import engine.enums.Waits;
 import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -47,8 +46,7 @@ public class HomePage {
 
     @Step("Click on [cart]")
     public HomePage clickOnCart() {
-        ElementActions.waitExplicitly(driver, 5, cart, Waits.CLICKABLE.toString());
-        ElementActions.click(driver, cart);
+        ElementActions.click(driver, cart, 8);
         CustomLogger.logger.info("Click on cart");
         return this;
     }
@@ -56,10 +54,8 @@ public class HomePage {
 
     @Step("Click on [checkOut]")
     public HomePage clickOnCheckOut() {
-        ElementActions.waitExplicitly(driver, 10, checkout, Waits.VISIBLE.toString());
-        ElementActions.scrollToElement(driver, checkout);
-        ElementActions.waitExplicitly(driver, 10, checkout, Waits.CLICKABLE.toString());
-        ElementActions.useJavaExecutorToClick(driver, checkout);
+        ElementActions.scrollToElement(driver, checkout, 10);
+        ElementActions.useJavaExecutorToClick(driver, checkout, 10);
         CustomLogger.logger.info("Click on checkout");
         return this;
     }
@@ -67,15 +63,14 @@ public class HomePage {
 
     @Step("Click on [viewAndEdit]")
     public HomePage clickOnViewAndEdit() {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(viewAndEditCart));
-        ElementActions.click(driver, viewAndEditCart);
+        ElementActions.click(driver, viewAndEditCart, 6);
         CustomLogger.logger.info("Click on view and edit");
         return this;
     }
 
     @Step("Type in search bar [{text}] and click [enter]")
     public HomePage typeSearchBar(String text) {
-        ElementActions.type(driver, search_txtArea, text);
+        ElementActions.type(driver, search_txtArea, text, 10);
         ElementActions.clickEnter(driver, search_txtArea);
         CustomLogger.logger.info("Type in search bar: " + text + " Then click enter");
         return this;
