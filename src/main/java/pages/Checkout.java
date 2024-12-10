@@ -122,7 +122,7 @@ public class Checkout extends HomePage {
 
     @Step("Click on [place order btn]")
     public Checkout clickPlaceOrderButton() {
-        ElementActions.useJavaExecutorToClick(driver, placeOrder, 10);
+        ElementActions.useJavaExecutorToClick(driver, placeOrder, 15);
         CustomLogger.logger.info("click on place order button");
         return this;
     }

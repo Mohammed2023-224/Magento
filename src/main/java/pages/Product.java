@@ -54,8 +54,9 @@ public class Product extends HomePage {
 
     @Step("Choose size [{size}]")
     public Product chooseSize(String size) {
-        if (ElementActions.isElementDisplayed(driver, productSizeCount)) {
+        if (!size.isEmpty()) {
             try {
+//                ElementActions.scrollToElement(driver, productSizes(size), 10);
                 ElementActions.useJavaExecutorToClick(driver, productSizes(size), 5);
                 CustomLogger.logger.info("Choose size: " + size);
             } catch (Exception e) {
@@ -70,9 +71,9 @@ public class Product extends HomePage {
 
     @Step("Choose color [{color}]")
     public Product chooseColor(String color) {
-        if (ElementActions.isElementDisplayed(driver, productColorsCount)) {
+        if (!color.isEmpty()) {
             try {
-                ElementActions.scrollToElement(driver, productColors(color), 10);
+//                ElementActions.scrollToElement(driver, productColors(color), 10);
                 ElementActions.useJavaExecutorToClick(driver, productColors(color), 5);
                 CustomLogger.logger.info("chose color: " + color);
             } catch (Exception e) {

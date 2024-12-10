@@ -71,7 +71,8 @@ public class ElementActions {
     }
 
     public static void useJavaExecutorToClick(WebDriver driver, By locator, int time) {
-        waitExplicitly(driver, time, locator, Waits.VISIBLE.toString());
+        waitExplicitly(driver, time, locator, Waits.PRESENT.toString());
+        waitExplicitly(driver, time, locator, Waits.CLICKABLE.toString());
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(locator));
         CustomLogger.logger.info("Click on element using JS executor: " + locator);
     }

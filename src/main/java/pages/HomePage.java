@@ -53,8 +53,8 @@ public class HomePage {
 
     @Step("Click on [checkOut]")
     public HomePage clickOnCheckOut() {
-        ElementActions.scrollToElement(driver, checkout, 10);
-        ElementActions.useJavaExecutorToClick(driver, checkout, 10);
+//        ElementActions.scrollToElement(driver, checkout, 15);
+        ElementActions.useJavaExecutorToClick(driver, checkout, 15);
         CustomLogger.logger.info("Click on checkout");
         return this;
     }
