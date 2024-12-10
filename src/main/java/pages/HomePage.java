@@ -3,11 +3,11 @@ package pages;
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
 import engine.constants.FrameWorkConstants;
+import engine.enums.Waits;
 import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage {
     WebDriver driver;
@@ -31,14 +31,14 @@ public class HomePage {
     @Step("Navigate to website")
     public HomePage navigationToWebSite() {
         driver.get(FrameWorkConstants.url);
-        ElementActions.waitExplicitly(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(logo));
+        ElementActions.waitExplicitly(driver, 5, logo, String.valueOf(Waits.VISIBLE));
         CustomLogger.logger.info("Navigate to: {}", FrameWorkConstants.url);
         return this;
     }
 
     @Step("Navigate to [{crit}] numbered [{index}]")
     public HomePage navigateBetweenLinks(String crit, double index) {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.presenceOfElementLocated(navigationOptions(crit, (int) index)));
+        ElementActions.waitExplicitly(driver, 5, navigationOptions(crit, (int) index), String.valueOf(Waits.PRESENT));
         BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, navigationOptions(crit, (int) index), "href"));
         CustomLogger.logger.info("Navigate to sub link: " + crit + " with occurence number: " + index);
         return this;

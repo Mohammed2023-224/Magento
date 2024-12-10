@@ -2,11 +2,11 @@ package pages;
 
 import engine.action.BrowserActions;
 import engine.action.ElementActions;
+import engine.enums.Waits;
 import engine.logger.CustomLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class Inv extends HomePage {
 
     @Step("count products")
     public int countProducts() {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
+        ElementActions.waitExplicitly(driver, 5, allProducts, String.valueOf(Waits.VISIBLE));
         int counting = ElementActions.countElements(driver, allProducts);
         CustomLogger.logger.info("Count products: " + counting);
         return counting;
@@ -68,8 +68,8 @@ public class Inv extends HomePage {
 
     @Step("get product names")
     public ArrayList<String> getProductsNames() {
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(allProducts));
         CustomLogger.logger.info("get Product names in an array list");
+        ElementActions.waitExplicitly(driver, 5, allProducts, String.valueOf(Waits.VISIBLE));
         return ElementActions.getTextFromListOfElements(driver, allProductsNames);
     }
 
@@ -77,7 +77,7 @@ public class Inv extends HomePage {
     public Inv chooseLimiter(double index) {
         ElementActions.handleSelection(driver, limiter, (int) index, 10);
         CustomLogger.logger.info("Choose limiter indexed: " + index);
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProducts));
+        ElementActions.waitExplicitly(driver, 5, allProducts, String.valueOf(Waits.CLICKABLE));
         return this;
     }
 
@@ -85,7 +85,7 @@ public class Inv extends HomePage {
     public Inv chooseSorter(double index) {
         ElementActions.handleSelection(driver, sorter, index, 5);
         CustomLogger.logger.info("Choose sorter indexed: " + index);
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.elementToBeClickable(allProductsNames));
+        ElementActions.waitExplicitly(driver, 5, allProductsNames, String.valueOf(Waits.CLICKABLE));
         return this;
     }
 
@@ -94,10 +94,10 @@ public class Inv extends HomePage {
         ElementActions.scrollToElement(driver, certainProduct((int) index), 10);
         ElementActions.hover(driver, certainProduct((int) index));
         CustomLogger.logger.info("hover over product indexed: " + index);
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(certainProductCompare((int) index)));
+        ElementActions.waitExplicitly(driver, 5, certainProductCompare((int) index), String.valueOf(Waits.VISIBLE));
         ElementActions.click(driver, certainProductCompare((int) index), 6);
         CustomLogger.logger.info("click on product compare button for product indexed: " + index);
-        ElementActions.waitExplicitly(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(addedMessage));
+        ElementActions.waitExplicitly(driver, 5, addedMessage, String.valueOf(Waits.VISIBLE));
         return this;
     }
 
@@ -116,12 +116,12 @@ public class Inv extends HomePage {
     @Step("choose filter [{filterType}]")
     public Inv clickOnFilter(String filterType) {
         try {
-            ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionFilters(filterType)));
+            ElementActions.waitExplicitly(driver, 5, leftSectionFilters(filterType), String.valueOf(Waits.PRESENT));
             BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionFilters(filterType), "href"));
             CustomLogger.logger.info("choose filter: " + filterType);
         } catch (Exception e1) {
             try {
-                ElementActions.waitExplicitly(driver, 3).until(ExpectedConditions.presenceOfElementLocated(leftSectionSizeAndColorFilters(filterType)));
+                ElementActions.waitExplicitly(driver, 5, leftSectionFilters(filterType), String.valueOf(Waits.PRESENT));
                 BrowserActions.navigateToURL(driver, ElementActions.getAttribute(driver, leftSectionSizeAndColorFilters(filterType), "href"));
                 CustomLogger.logger.info("Choose filter: " + filterType);
             } catch (Exception e2) {

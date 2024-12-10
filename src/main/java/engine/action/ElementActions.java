@@ -65,14 +65,6 @@ public class ElementActions {
         CustomLogger.logger.info("Click on element: " + locator);
     }
 
-
-    public static WebDriverWait waitExplicitly(WebDriver driver, int time) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-        CustomLogger.logger.info("Wait for element to be ready for: " + time + " sec");
-        return wait;
-    }
-
-
     public static void clickEnter(WebDriver driver, By locator) {
         driver.findElement(locator).sendKeys(Keys.ENTER);
         CustomLogger.logger.info("Click on enter");
