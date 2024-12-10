@@ -1,7 +1,7 @@
 ## Introduction
 
  This is an automated testing project for a demo E-commerce website https://magento.softwaretestingboard.com/ .
- Automated some tests to check the filters and categories and an end-to-end test about the full process from navigating to the website and then searching and ordering the product 
+ Automated some tests to check the filters and categories and an end-to-end test about the full process from navigating to the website and searching and ordering the product 
  using parallel execution to execute on 3 browsers simultaneously. number of tests is 6 for each browser
 
 ## Tools and Dependencies
@@ -25,4 +25,7 @@
 ## What can be enhanced
 
 - Running of parallel tests can be enhanced as running only one test won't run for all browsers
-- The wait strategy can be enhanced 
+- The wait strategy can be enhanced
+- Setup file configuration logic can be adjusted
+- Using JSON instead of Excel
+- Handle more browsrs
