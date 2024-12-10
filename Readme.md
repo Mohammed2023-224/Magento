@@ -22,6 +22,8 @@
   
   PS. To run this make sure that the setup file is configured to run locally with the required browser or all for parallel execution across browsers
 
+- Can handle most important configuration from the setup file from headless mode and window maximization etc.. (choose the value and let the project do the magic) 
+
 ## What can be enhanced
 
 - Running of parallel tests can be enhanced as running only one test won't run for all browsers
