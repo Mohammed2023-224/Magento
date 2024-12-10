@@ -51,7 +51,6 @@ public class HomePage {
         return this;
     }
 
-
     @Step("Click on [checkOut]")
     public HomePage clickOnCheckOut() {
         ElementActions.scrollToElement(driver, checkout, 10);
@@ -59,7 +58,6 @@ public class HomePage {
         CustomLogger.logger.info("Click on checkout");
         return this;
     }
-
 
     @Step("Click on [viewAndEdit]")
     public HomePage clickOnViewAndEdit() {
@@ -75,6 +73,4 @@ public class HomePage {
         CustomLogger.logger.info("Type in search bar: " + text + " Then click enter");
         return this;
     }
-
-
 }
