@@ -15,10 +15,11 @@
 ## How to run
 
 - Can run from docker using docker-compose up (All the images should be downloaded directly)
-- 
+  
   PS. To run this make sure that the setup file is configured to run remotely on port 4444 configured in the YAML file with the browser configured for all browsers
 
 - Can run locally by typing MVN CLEAN TEST in CMD
+  
   PS. To run this make sure that the setup file is configured to run locally with the required browser or all for parallel execution across browsers
 
 ## What can be enhanced
