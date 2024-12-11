@@ -33,8 +33,8 @@ public class Checkout extends HomePage {
     private final By freeDelivery = By.xpath("(//input[@class='radio'])[1]");
 
     private void waitForLoader() {
-        ElementActions.waitExplicitly(driver, 10, loadingImg, Waits.VISIBLE.toString());
-        ElementActions.waitExplicitly(driver, 10, loadingImg, Waits.INVISIBLE.toString());
+        ElementActions.waitExplicitly(driver, 20, loadingImg, Waits.VISIBLE.toString());
+        ElementActions.waitExplicitly(driver, 20, loadingImg, Waits.INVISIBLE.toString());
     }
 
     @Step("Type in email field [{email}]")
@@ -47,7 +47,7 @@ public class Checkout extends HomePage {
 
     @Step("Type in name field [{name}]")
     public Checkout typeNameField(String name) {
-        ElementActions.type(driver, nameField_txtArea, name, 10);
+        ElementActions.type(driver, nameField_txtArea, name, 20);
         CustomLogger.logger.info("type: " + nameField_txtArea + " in name field");
         return this;
     }
@@ -76,7 +76,7 @@ public class Checkout extends HomePage {
     @Step("Type in phone field [{phone}]")
     public Checkout typePhoneField(String phone) {
         ElementActions.type(driver, telephone_txtArea, phone, 10);
-        waitForLoader();
+//        waitForLoader();
         CustomLogger.logger.info("type: " + telephone_txtArea + "in phone field");
         return this;
     }
@@ -108,28 +108,41 @@ public class Checkout extends HomePage {
 
     @Step("Choose [free delivery] checkbox")
     public Checkout chooseDelivery() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         ElementActions.useJavaExecutorToClick(driver, freeDelivery, 10);
+        if (ElementActions.isElementSelected(driver, freeDelivery)) {
+            ElementActions.useJavaExecutorToClick(driver, freeDelivery, 10);
+        }
         CustomLogger.logger.info("click on free delivery checkbox");
         return this;
     }
 
     @Step("Click on [next btn]")
     public Checkout clickNextButton() {
-        ElementActions.useJavaExecutorToClick(driver, nex_btn, 10);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        ElementActions.useJavaExecutorToClick(driver, nex_btn, 20);
         CustomLogger.logger.info("click on next button");
         return this;
     }
 
     @Step("Click on [place order btn]")
     public Checkout clickPlaceOrderButton() {
-        ElementActions.useJavaExecutorToClick(driver, placeOrder, 15);
+        ElementActions.useJavaExecutorToClick(driver, placeOrder, 20);
         CustomLogger.logger.info("click on place order button");
         return this;
     }
 
     @Step("get order number")
     public String getOrderNumber() {
-        String order = ElementActions.getText(driver, orderNumber, 10);
+        String order = ElementActions.getText(driver, orderNumber, 20);
         CustomLogger.logger.info("get order Number: " + order);
         return order;
     }

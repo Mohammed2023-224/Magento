@@ -15,8 +15,8 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
     int failedTestCases = 0;
     int skippedTestCases = 0;
     ArrayList<String> success = new ArrayList<>();
-    static int counter = 0;
-    static int retryLimit = 4;
+    int counter = 0;
+    int retryLimit = 5;
     static String allurePath = FrameWorkConstants.allureDirectory;
     String testLogFile = FrameWorkConstants.testLogFile;
     String completeLogFile = FrameWorkConstants.completeLogFile;
@@ -42,9 +42,9 @@ public class TestngListener implements ITestListener, IExecutionListener, IRetry
         //screenshot to folder
         ScreenshotManager.takeScreenShotFolder(mainDriver, result.getName());
         //screenshot in allure report
+        retry(result);
         AllureListener.saveScreenShot(mainDriver, result.getName() + " failure screenshot ");
         AllureListener.saveTextLog(testLogFile);
-        retry(result);
         ListenerHelpers.deleteFile(testLogFile);
         CustomLogger.logger.info("retried test case for: " + counter + " times");
     }

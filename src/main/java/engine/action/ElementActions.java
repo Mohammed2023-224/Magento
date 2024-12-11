@@ -48,6 +48,7 @@ public class ElementActions {
 
     public static void type(WebDriver driver, By locator, String text, int time) {
         waitExplicitly(driver, time, locator, Waits.VISIBLE.toString());
+        waitExplicitly(driver, time, locator, Waits.CLICKABLE.toString());
         driver.findElement(locator).sendKeys(text);
         CustomLogger.logger.info("Type: " + text + " in field: " + locator);
     }
@@ -113,6 +114,16 @@ public class ElementActions {
         try {
             driver.findElement(locator).isEnabled();
             CustomLogger.logger.info("Element: " + locator + " is enabled");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static Boolean isElementSelected(WebDriver driver, By locator) {
+        try {
+            driver.findElement(locator).isSelected();
+            CustomLogger.logger.info("Element: " + locator + " is selected");
             return true;
         } catch (Exception e) {
             return false;
