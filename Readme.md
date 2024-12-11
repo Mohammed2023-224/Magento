@@ -22,7 +22,11 @@
   
   PS. To run this make sure that the setup file is configured to run locally with the required browser or all for parallel execution across browsers
 
-- Can handle most important configuration from the setup file from headless mode and window maximization etc.. (choose the value and let the project do the magic) 
+- Can handle most important configuration from the setup file from headless mode and window maximization etc.. (choose the value and let the project do the magic)
+
+- Don't choose a single browser and run the MVN CLaen Test command as this will cause the browser to run 3 times instead of the rest of the browsers
+
+- Tests may be unstable due to change in locators from devs or adding ads 
 
 ## What can be enhanced
 
@@ -30,4 +34,4 @@
 - The wait strategy can be enhanced
 - Setup file configuration logic can be adjusted
 - Using JSON instead of Excel
-- Handle more browsrs
+- Handle more browsers
